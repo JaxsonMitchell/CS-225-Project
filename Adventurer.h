@@ -1,14 +1,15 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <fstream>
 using namespace std;
 class Adventurer
 {protected:
-	static int maxHealth;
-	static int attackValue;
-	int currentHealth;
+	const int maxHealth = 100;
+	const int attackValue = 10;
+	int currentHealth = 0;
 	string name;
-	int initative;
+	int initative = 0;
 
 public:
 	void defend();
@@ -22,16 +23,25 @@ public:
 };
 class Knight : public Adventurer {
 private:
-	static int maxHealth;
-	static int attackValue;
+	const int maxHealth = 100;
+	const int attackValue = 10;
 	int currentHealth;
 public:
 	void taunt();
-	Knight() {
+	void displayActions() {
+		cout << "1. Attack" << endl;
+		cout << "2. Defend" << endl;
+		cout << "3. Taunt" << endl;
+	}
+	Knight(){
 		cout << "Enter the name of your Knight:";
 		cin >> name;
-		maxHealth = 100;
-		attackValue = 10;
+		ifstream myfile ("Knight_Art.txt");
+		char art;
+		while (myfile) {
+			art = myfile.get();
+			cout << art;
+		}
 		currentHealth = 100;
 	};
 
@@ -39,55 +49,84 @@ public:
 };
 class Rogue : public Adventurer {
 private:
-	static int maxHealth;
-	static int attackValue;
+	const int maxHealth = 75;
+	const int attackValue = 20;
 	int currentHealth;
 	double critChance;
 public:
 	void ambush();
 	void basicAttack();
+	void displayActions() {
+		cout << "1. Attack" << endl;
+		cout << "2. Defend" << endl;
+		cout << "3. Ambush" << endl;
+	}
 	Rogue() {
 		cout << "Enter the name of your Rogue:";
 		cin >> name;
-		maxHealth = 75;
-		attackValue = 20;
+		ifstream myfile("Rogue_Art.txt");
+		char art;
+		while (myfile) {
+			art = myfile.get();
+			cout << art;
+		}
 		currentHealth = 75;
 		critChance = 0.33;
 	}
 };
 class Wizard : public Adventurer {
 private:
-	static int maxHealth;
-	static int attackValue;
+	const int maxHealth = 50;
+	const int attackValue = 25;
 	int currentHealth;
 	int numFireballs;
 public:
 	void fireball();
 	void refocus();
+	void displayActions() {
+		cout << "1. Attack" << endl;
+		cout << "2. Defend" << endl;
+		cout << "3. Fireball" << endl;
+		cout << "4. Refocus" << endl;
+	}
 	Wizard() {
 		cout << "Enter the name of your Wizard:";
 		cin >> name;
-		maxHealth = 50;
+		ifstream myfile("Wizard_Art.txt");
+		char art;
+		while (myfile) {
+			art = myfile.get();
+			cout << art;
+		}
 		currentHealth = 50;
-		attackValue = 25;
 		numFireballs = 2;
 
 	}
 };
 class Priest : public Adventurer {
 private:
-	static int maxHealth;
-	static int attackValue;
+	const int maxHealth = 50;
+	const int attackValue = 5;
 	int currentHealth;
 public:
 	void heal();
 	void healAll();
+	void displayActions() {
+		cout << "1. Attack" << endl;
+		cout << "2. Defend" << endl;
+		cout << "3. Heal" << endl;
+		cout << "4. Heal All" << endl;
+	}
 	Priest() {
-		cout << " Enter the name of your Priest:";
+		cout << "Enter the name of your Priest:";
 		cin >> name;
-		maxHealth = 50;
+		ifstream myfile("Priest_Art.txt");
+		char art;
+		while (myfile) {
+			art = myfile.get();
+			cout << art;
+		}
 		currentHealth = 50;
-		attackValue = 5;
 	}
 
 };
