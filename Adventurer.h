@@ -3,15 +3,22 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-class Adventurer
-{protected:
+class Adventurer {
+   protected:
 	const int maxHealth = 100;
 	const int attackValue = 10;
 	int currentHealth = 0;
 	string name;
-	int initative = 0;
+	
 
-public:
+   public:
+    int initative = 0;
+    // Using virtural to overlaod the opporator latter
+    virtual void displayActions() {};
+    
+    virtual void set_initative(int num) {initative = num;}
+    
+    int get_initative() {return initative;}
 	void defend();
 	void basicAttack();
 	void lowerHealth(int x) {
@@ -26,15 +33,17 @@ private:
 	const int maxHealth = 100;
 	const int attackValue = 10;
 	int currentHealth;
+	int initative = 0;
 public:
 	void taunt();
 	void displayActions() {
+	    cout << name << " the Knight Actions: "<< endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Defend" << endl;
 		cout << "3. Taunt" << endl;
 	}
 	Knight(){
-		cout << "Enter the name of your Knight:";
+		cout << "Enter the name of your Knight: ";
 		cin >> name;
 		ifstream myfile ("Knight_Art.txt");
 		char art;
@@ -53,16 +62,19 @@ private:
 	const int attackValue = 20;
 	int currentHealth;
 	double critChance;
+	
 public:
 	void ambush();
 	void basicAttack();
+	void set_initative(int num) {initative = num;}
 	void displayActions() {
+	    cout << name << " the Rogue Actions: "<< endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Defend" << endl;
 		cout << "3. Ambush" << endl;
 	}
 	Rogue() {
-		cout << "Enter the name of your Rogue:";
+		cout << "Enter the name of your Rogue: ";
 		cin >> name;
 		ifstream myfile("Rogue_Art.txt");
 		char art;
@@ -83,14 +95,16 @@ private:
 public:
 	void fireball();
 	void refocus();
+	void set_initative(int num) {initative = num;}
 	void displayActions() {
+	    cout << name << " the Wizard Actions: "<< endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Defend" << endl;
 		cout << "3. Fireball" << endl;
 		cout << "4. Refocus" << endl;
 	}
 	Wizard() {
-		cout << "Enter the name of your Wizard:";
+		cout << "Enter the name of your Wizard: ";
 		cin >> name;
 		ifstream myfile("Wizard_Art.txt");
 		char art;
@@ -112,13 +126,14 @@ public:
 	void heal();
 	void healAll();
 	void displayActions() {
+	    cout << name << " the Priest Actions: "<< endl;
 		cout << "1. Attack" << endl;
 		cout << "2. Defend" << endl;
 		cout << "3. Heal" << endl;
 		cout << "4. Heal All" << endl;
 	}
 	Priest() {
-		cout << "Enter the name of your Priest:";
+		cout << "Enter the name of your Priest: ";
 		cin >> name;
 		ifstream myfile("Priest_Art.txt");
 		char art;
