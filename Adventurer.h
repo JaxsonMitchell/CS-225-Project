@@ -2,8 +2,9 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <Battler.h>
 using namespace std;
-class Adventurer {
+class Adventurer: public Battler {
    protected:
 	const int maxHealth = 100;
 	const int attackValue = 10;
