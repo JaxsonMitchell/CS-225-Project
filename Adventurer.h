@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <Battler.h>
+#include "Battler.h"
 using namespace std;
 class Adventurer: public Battler {
    protected:
@@ -13,13 +13,9 @@ class Adventurer: public Battler {
 	
 
    public:
-    int initative = 0;
     // Using virtural to overlaod the opporator latter
     virtual void displayActions() {};
     
-    virtual void set_initative(int num) {initative = num;}
-    
-    int get_initative() {return initative;}
 	void defend();
 	void basicAttack();
 	void lowerHealth(int x) {
