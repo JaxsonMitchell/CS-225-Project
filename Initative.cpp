@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <fstream>
 #include <iostream>
 #include <time.h>
@@ -33,20 +32,34 @@ int main() {
     Knight* kp;
     kp = &knight;
     
-    Set_initative(wizard, knight);
-    int randomNum;
+    Rogue rogue;
+    Rogue* rp;
+    rp = &rogue;
+    
+    Priest priest;
+    Priest* pp;
+    pp = &priest;
     
     srand(time(NULL));
-    randomNum = 1 + (rand() % 20);
+    int randomNum = 1 + (rand() % 20);
     wizard.set_initative(randomNum);
     
     randomNum = 1 + (rand() % 20);
     knight.set_initative(randomNum);
     
+    randomNum = 1 + (rand() % 20);
+    rogue.set_initative(randomNum);
+    
+    randomNum = 1 + (rand() % 20);
+    priest.set_initative(randomNum);
+    
+    
+    
     vector<Adventurer*> adventurers;
     adventurers.push_back(wp);
     adventurers.push_back(kp);
-    adventurers.push_back(new Adventurer);
+    adventurers.push_back(rp);
+    adventurers.push_back(pp);
     
     for (i = 0; i < (adventurers.size()); i++) {
         cout<<"initative "<<adventurers[i]->get_initative()<<endl;
@@ -54,17 +67,16 @@ int main() {
         cout<<endl;
     }
     
-    randomNum = 1 + (rand() % 20);
-    wizard.set_initative(randomNum);
-    
-    randomNum = 1 + (rand() % 20);
-    knight.set_initative(randomNum);
-    
-    
+    vector<Battler*> battler;
     for (i = 0; i < (adventurers.size()); i++) {
+        battler.push_back(adventurers[i]);
+    }
+    
+    sort(battler.begin(), battler.end());
+    
+    for (i = 0; i < (battler.size()); i++) {
         
-                
-        cout<<"initative "<<adventurers[i]->get_initative()<<endl;
+        cout<<"initative "<<battler[i]->get_initative()<<endl;
     }
 
     return 0;
