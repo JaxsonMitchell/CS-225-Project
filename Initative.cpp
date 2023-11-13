@@ -1,4 +1,5 @@
 #include <fstream>
+#include <fstream>
 #include <iostream>
 #include <time.h>
 #include <vector>
@@ -8,40 +9,20 @@
 using namespace std;
 
 
-void Set_initative(Wizard w, Knight k) {
-    int randomNum;
-    
-    srand(time(NULL));
-    randomNum = 1 + (rand() % 20);
-    w.set_initative(randomNum);
-    
-    srand(time(NULL));
-    randomNum = 1 + (rand() % 20);
-    k.set_initative(randomNum);
-}
-
-
-
 int main() {
     int i = 0;
+    
+    // Creating the adventurers
     Wizard wizard;
-    Wizard* wp;
-    wp = &wizard;
-    
     Knight knight;
-    Knight* kp;
-    kp = &knight;
-    
     Rogue rogue;
-    Rogue* rp;
-    rp = &rogue;
-    
     Priest priest;
-    Priest* pp;
-    pp = &priest;
+
     
+    // Rolling for initative
+    int randomNum;
     srand(time(NULL));
-    int randomNum = 1 + (rand() % 20);
+    randomNum = 1 + (rand() % 20);
     wizard.set_initative(randomNum);
     
     randomNum = 1 + (rand() % 20);
@@ -54,29 +35,30 @@ int main() {
     priest.set_initative(randomNum);
     
     
+    // Putting adventurers into a vector 
+    vector<Battler> adventurers;
+    adventurers.push_back(wizard);
+    adventurers.push_back(knight);
+    adventurers.push_back(rogue);
+    adventurers.push_back(priest);
     
-    vector<Adventurer*> adventurers;
-    adventurers.push_back(wp);
-    adventurers.push_back(kp);
-    adventurers.push_back(rp);
-    adventurers.push_back(pp);
-    
+    // Displays unsorted initative
     for (i = 0; i < (adventurers.size()); i++) {
-        cout<<"initative "<<adventurers[i]->get_initative()<<endl;
-        adventurers[i]->displayActions();
-        cout<<endl;
-    }
-    
-    vector<Battler*> battler;
-    for (i = 0; i < (adventurers.size()); i++) {
-        battler.push_back(adventurers[i]);
-    }
-    
-    sort(battler.begin(), battler.end());
-    
-    for (i = 0; i < (battler.size()); i++) {
+        cout<<"initative "<<adventurers[i].get_initative()<<endl;
         
-        cout<<"initative "<<battler[i]->get_initative()<<endl;
+    }
+    
+    
+    // Sorting from higest initative to lowest
+    sort(adventurers.begin(), adventurers.end());
+
+    
+    // Displays sorted initative
+    sort(adventurers.begin(), adventurers.end());
+    cout<<endl;
+    for (i = 0; i < (adventurers.size()); i++) {
+        
+        cout<<"initative "<<adventurers[i].get_initative()<<endl;
     }
 
     return 0;
