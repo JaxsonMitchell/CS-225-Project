@@ -1,6 +1,6 @@
 # CS-225-Project
 ## Overview
-This repository is a simplified text-based DND campaign for our Computer Science II course (CS 225) created by Zoe Marowek, Thomas Meyers, and Jaxson Mitchell. To run the code, you run from main which will call the campaign. 
+This repository is a simplified text-based DND campaign for our Computer Science II course (CS 225) created by Zoe Marowek, Thomas Meyers, and Jaxson Mitchell. To run the code, you run from main which will call the campaign. Our game utilizes object-oriented programing that is organized through vectors. Each object has its own unique class that all inherits from a common parent class.
 
 ## Style Guide
 Here are a few necessary guides that are followed in the project.
