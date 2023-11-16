@@ -6,16 +6,13 @@
 using namespace std;
 
 class Battler {
-   private:
-    int initative;
+    private:
+        int initiative;
+    public:
+        virtual void set_initative(int num){initiative = num;}
+        int get_initative() {return initiative;}
 
-   public:
-    
-    // Using virtural to overlaod the opporator latter
-    virtual void set_initative(int num) {initative = num;}
-    int get_initative() {return initative;}
-    
-    bool operator<(Battler b2) {
-        return initative > b2.initative;
-    }
+        bool operator<(Battler b2) {
+            return initiative > b2.initiative;
+        }
 };
