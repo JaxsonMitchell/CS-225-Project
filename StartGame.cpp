@@ -8,13 +8,54 @@
 #include <algorithm>
 #include <stdio.h>
 #include <unistd.h>
-
+#include <chrono>
+#include <thread>
+#include <cmath>
 #include "Adventurer.h"
+#include "Monster.h"
+#include "Battler.h"
+
+class Battle{
+    private:
+        vector<Adventurer> party;
+        vector<Monster> enemies;
+        vector<Battler> combatants;
+    public:
+        Battle(
+            vector<Adventurer> party,
+            vector<Monster> enemies,
+            vector<Battler> combatants
+        ){
+            this->party = party;
+            this->enemies = enemies;
+            this->combatants = combatants;
+            
+            int randomNum;
+            
+            // Sort combatants with initiative
+            for (int i = 0; i < combatants.size(); ++i){
+                randomNum = 1 + (rand() % 20);
+                combatants[i].set_initative(randomNum);
+            }
+            
+            sort(combatants.begin(), combatants.end());
+        }
+};
 
 
+void displayStringLikeText(string text, float rateOfMessage){
+    // Displays string text with a slight delay to emulate typing.
+    for (int i = 0; i < text.length(); i++){
+        cout << text[i] << flush;
+        this_thread::sleep_for(chrono::milliseconds(static_cast<int>(1000 / rateOfMessage)));
+    }
+    cout << endl;
+}
 
 int main()
 {
+    srand(time(NULL));
+
     string reply;
     int i;
     cout<<"Once upon a time..."<<endl;
@@ -22,7 +63,7 @@ int main()
     cout<<"Four Adventures walk into the bar and the bartender says:"<<endl;
     sleep(3);
     printf(" \e[0;33m \n"); //yellow font
-    cout<<"Ay-yO WhAT are YE NAMEs?"<<endl;
+    displayStringLikeText("Ay-yO WhAT are YE NAMEs?", 30);
     printf("\e[0m");
     
     Wizard wizard;
@@ -37,15 +78,15 @@ int main()
     adventurers.push_back(priest);
     
     printf(" \e[0;33m \n"); //yellow font
-    cout<<"ThAts..."<<endl;
-    sleep(3);
-    cout<<"...nice..."<<endl;
+    displayStringLikeText("ThAts...", 30);
     sleep(1);
-    cout<<"Any ways. It appeares that I have lost my";
+    displayStringLikeText("...nice...", 30);
+    sleep(1);
+    displayStringLikeText("Any ways. It appeares that I have lost my", 30);
     printf(" \e[1;35m"); //purple font
-    cout<<"SALT SHAKER!"<<endl;
+    displayStringLikeText("SALT SHAKER!", 5);
     printf("\e[0;33m"); //yellow font
-    cout<<"Would you be kind enough to find it for me?"<<endl;
+    displayStringLikeText("Would you be kind enough to find it for me?", 30);
     printf("\e[0m \n");
    
     cout<< knight.getName() << " the knight replies with a kind ";
