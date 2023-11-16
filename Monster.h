@@ -4,6 +4,8 @@
 #include <climits>
 #include <time.h>
 
+#include "Battler.h"
+
 using namespace std;
 
 // FUNCTION HEADERS
@@ -300,4 +302,3 @@ class Dragon:public Monster{
         }
         
 };
-
