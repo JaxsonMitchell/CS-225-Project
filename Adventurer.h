@@ -5,53 +5,49 @@
 #include "Battler.h"
 using namespace std;
 class Adventurer: public Battler {
-   protected:
-	const int maxHealth = 100;
-	const int attackValue = 10;
-	int currentHealth = 0;
-	string name;
-	
-
-   public:
-    // Using virtural to overlaod the opporator latter
-    virtual void displayActions() {};
-    
-	void defend();
-	void basicAttack();
-	void lowerHealth(int x) {
-		currentHealth -= x;
-	};
-
-
-
+    protected:
+    	int maxHealth = 100;
+    	int attackValue = 10;
+    	int currentHealth = 0;
+    	string name;
+    public:
+        // Using virtural to overlaod the operator latter
+        virtual void displayActions() {};
+    	void defend();
+    	void basicAttack();
+    	void lowerHealth(int x) {
+    		currentHealth -= x;
+    	};
+    	string getName(){
+    	    return this->name;
+    	}
 };
+
 class Knight : public Adventurer {
-private:
-	const int maxHealth = 100;
-	const int attackValue = 10;
-	int currentHealth;
-	int initative = 0;
-public:
-	void taunt();
-	void displayActions() {
-	    cout << name << " the Knight Actions: "<< endl;
-		cout << "1. Attack" << endl;
-		cout << "2. Defend" << endl;
-		cout << "3. Taunt" << endl;
-	}
-	Knight(){
-		cout << "Enter the name of your Knight: ";
-		cin >> name;
-		ifstream myfile ("Knight_Art.txt");
-		char art;
-		while (myfile) {
-			art = myfile.get();
-			cout << art;
-		}
-		currentHealth = 100;
-	};
-
-
+    private:
+    	const int maxHealth = 100;
+    	const int attackValue = 10;
+    	int currentHealth;
+    	int initative = 0;
+    public:
+    	void taunt();
+    	void displayActions() {
+    	    cout << name << " the Knight Actions: "<< endl;
+    		cout << "1. Attack" << endl;
+    		cout << "2. Defend" << endl;
+    		cout << "3. Taunt" << endl;
+    	}
+    	Knight(){
+    		cout << "Enter the name of your Knight: ";
+    		cin >> name;
+    		ifstream myfile ("Knight_Art.txt");
+    		char art;
+    		while (myfile) {
+    			art = myfile.get();
+    			cout << art;
+    		}
+    		currentHealth = 100;
+    	};
 };
 class Rogue : public Adventurer {
 private:
@@ -63,7 +59,6 @@ private:
 public:
 	void ambush();
 	void basicAttack();
-	void set_initative(int num) {initative = num;}
 	void displayActions() {
 	    cout << name << " the Rogue Actions: "<< endl;
 		cout << "1. Attack" << endl;
@@ -92,7 +87,6 @@ private:
 public:
 	void fireball();
 	void refocus();
-	void set_initative(int num) {initative = num;}
 	void displayActions() {
 	    cout << name << " the Wizard Actions: "<< endl;
 		cout << "1. Attack" << endl;
