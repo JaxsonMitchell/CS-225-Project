@@ -68,7 +68,7 @@ Rogue::Rogue() {
 		cout << art;
     }
     currentHealth = 75;
-	critChance = 0.33;
+	critChance = 1;
 }
 
 
