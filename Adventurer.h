@@ -6,6 +6,11 @@
 
 using namespace std;
 
+
+/*******************************************************************************
+Adventure Class (Parent)
+
+*******************************************************************************/
 class Adventurer : public Battler {
     protected:
         int maxHealth = 100;
@@ -15,25 +20,21 @@ class Adventurer : public Battler {
     
     public:
         // Using virtual to overload the operator later
-        virtual void displayActions() {}
+        virtual void displayActions();
         void defend();
         void basicAttack();
-        void lowerHealth(int x) {
-            currentHealth -= x;
-        };
-        string getName() {
-            return this->name;
-        }
+        void lowerHealth(int x);
+        string getName();
     
         // Overloading the << operator for ostream
         friend ostream& operator<<(ostream&, const Adventurer&);
 };
 
-ostream& operator<<(ostream& os, const Adventurer& adventurer) {
-    os << adventurer.name << " has " << adventurer.currentHealth << " health left!";
-    return os;
-}
 
+/*******************************************************************************
+Knight Class (Child)
+
+*******************************************************************************/
 class Knight : public Adventurer {
     private:
     	const int maxHealth = 100;
@@ -42,24 +43,15 @@ class Knight : public Adventurer {
     	int initative = 0;
     public:
     	void taunt();
-    	void displayActions() {
-    	    cout << name << " the Knight Actions: "<< endl;
-    		cout << "1. Attack" << endl;
-    		cout << "2. Defend" << endl;
-    		cout << "3. Taunt" << endl;
-    	}
-    	Knight(){
-    		cout << "Enter the name of your Knight: ";
-    		cin >> name;
-    		ifstream myfile ("Knight_Art.txt");
-    		char art;
-    		while (myfile) {
-    			art = myfile.get();
-    			cout << art;
-    		}
-    		currentHealth = 100;
-    	};
+    	void displayActions();
+    	Knight();
 };
+
+
+/*******************************************************************************
+Rogue Class (Class)
+
+*******************************************************************************/
 class Rogue : public Adventurer {
 private:
 	const int maxHealth = 75;
@@ -68,27 +60,17 @@ private:
 	double critChance;
 	
 public:
+    Rogue();
 	void ambush();
 	void basicAttack();
-	void displayActions() {
-	    cout << name << " the Rogue Actions: "<< endl;
-		cout << "1. Attack" << endl;
-		cout << "2. Defend" << endl;
-		cout << "3. Ambush" << endl;
-	}
-	Rogue() {
-		cout << "Enter the name of your Rogue: ";
-		cin >> name;
-		ifstream myfile("Rogue_Art.txt");
-		char art;
-		while (myfile) {
-			art = myfile.get();
-			cout << art;
-		}
-		currentHealth = 75;
-		critChance = 0.33;
-	}
+	void displayActions();
 };
+
+
+/*******************************************************************************
+Wizard Class (Class)
+
+*******************************************************************************/
 class Wizard : public Adventurer {
 private:
 	const int maxHealth = 50;
@@ -98,27 +80,12 @@ private:
 public:
 	void fireball();
 	void refocus();
-	void displayActions() {
-	    cout << name << " the Wizard Actions: "<< endl;
-		cout << "1. Attack" << endl;
-		cout << "2. Defend" << endl;
-		cout << "3. Fireball" << endl;
-		cout << "4. Refocus" << endl;
-	}
-	Wizard() {
-		cout << "Enter the name of your Wizard: ";
-		cin >> name;
-		ifstream myfile("Wizard_Art.txt");
-		char art;
-		while (myfile) {
-			art = myfile.get();
-			cout << art;
-		}
-		currentHealth = 50;
-		numFireballs = 2;
-
-	}
+	void displayActions();
+	Wizard();
 };
+
+
+
 class Priest : public Adventurer {
 private:
 	const int maxHealth = 50;
@@ -127,23 +94,7 @@ private:
 public:
 	void heal();
 	void healAll();
-	void displayActions() {
-	    cout << name << " the Priest Actions: "<< endl;
-		cout << "1. Attack" << endl;
-		cout << "2. Defend" << endl;
-		cout << "3. Heal" << endl;
-		cout << "4. Heal All" << endl;
-	}
-	Priest() {
-		cout << "Enter the name of your Priest: ";
-		cin >> name;
-		ifstream myfile("Priest_Art.txt");
-		char art;
-		while (myfile) {
-			art = myfile.get();
-			cout << art;
-		}
-		currentHealth = 50;
-	}
+	void displayActions();
+	Priest();
 
 };
