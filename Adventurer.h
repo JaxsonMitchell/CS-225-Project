@@ -3,25 +3,36 @@
 #include <iostream>
 #include <fstream>
 #include "Battler.h"
+
 using namespace std;
-class Adventurer: public Battler {
+
+class Adventurer : public Battler {
     protected:
-    	int maxHealth = 100;
-    	int attackValue = 10;
-    	int currentHealth = 0;
-    	string name;
+        int maxHealth = 100;
+        int attackValue = 10;
+        int currentHealth = 0;
+        string name;
+    
     public:
-        // Using virtural to overlaod the operator latter
-        virtual void displayActions() {};
-    	void defend();
-    	void basicAttack();
-    	void lowerHealth(int x) {
-    		currentHealth -= x;
-    	};
-    	string getName(){
-    	    return this->name;
-    	}
+        // Using virtual to overload the operator later
+        virtual void displayActions() {}
+        void defend();
+        void basicAttack();
+        void lowerHealth(int x) {
+            currentHealth -= x;
+        };
+        string getName() {
+            return this->name;
+        }
+    
+        // Overloading the << operator for ostream
+        friend ostream& operator<<(ostream&, const Adventurer&);
 };
+
+ostream& operator<<(ostream& os, const Adventurer& adventurer) {
+    os << adventurer.name << " has " << adventurer.currentHealth << " health left!";
+    return os;
+}
 
 class Knight : public Adventurer {
     private:
