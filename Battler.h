@@ -9,7 +9,7 @@ class Battler {
     private:
         int initiative;
     public:
-        virtual void set_initative(int num){initiative = num;}
+        virtual void set_initiative(int num){initiative = num;}
         int get_initative() {return initiative;}
 
         bool operator<(Battler b2) {
