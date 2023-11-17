@@ -15,7 +15,7 @@ void promptUserUntilReceiveJoke2();
 
 
 //CLASSES
-class Monster{
+class Monster : public Battler{
     protected:
         int maxHealth;
         int currentHealth;
@@ -25,7 +25,9 @@ class Monster{
             // Lowers the monster's health.
             this->currentHealth = (currentHealth - healthDropped > 0) ? (currentHealth - healthDropped) : 0;
         }
-    
+        string getName() {
+            return this->monsterName;
+        }    
     friend ostream& operator<<(ostream& os, const Monster monster);
 };
 
@@ -300,5 +302,4 @@ class Dragon:public Monster{
                 rend();
             }
         }
-        
 };
