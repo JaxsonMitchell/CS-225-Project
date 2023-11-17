@@ -40,7 +40,6 @@ class Knight : public Adventurer {
     	const int maxHealth = 100;
     	const int attackValue = 10;
     	int currentHealth;
-    	int initative = 0;
     public:
     	void taunt();
     	void displayActions();
@@ -62,7 +61,7 @@ private:
 public:
     Rogue();
 	void ambush();
-	void basicAttack();
+	void rogueAttack();
 	void displayActions();
 };
 
