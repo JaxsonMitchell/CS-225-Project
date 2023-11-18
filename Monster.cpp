@@ -91,8 +91,12 @@ Gnomeageddon::~Gnomeageddon(){
     cout<< "I'm all on my GNOME! *runs away*" << endl;
 }
 
-Gnomeageddon::void attack(){
+Gnomeageddon::void attack(vector<Adeventurer> A){
     // ADD CODE HERE FOR BASIC ATTACK
+    int x = rand() % A.size();
+    A[x].lowerHealth(currentHealth / 2);
+    cout<<"Gnomeaggeddon strikes " << A[x].getName<<endl;
+    cout<<A[x]<<endl;
 }
 
 Gnomeageddon::void lowerAttack(){
@@ -137,8 +141,12 @@ Lion::~Lion(){
     cout << "Ringleader: No Henry!" << endl;
 }
 
-Lion::void pounce(){
+Lion::void pounce(vector<Adventurer> A){
     // Add implementation for pounce.
+    int x = rand() % A.size();
+    A[x].lowerHealth(20);
+    cout<<" The Lion pounces on "<<A[x].getName<<endl;
+    cout<<A[x]<<endl;
 }
 
 
