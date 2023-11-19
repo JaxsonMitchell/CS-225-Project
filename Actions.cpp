@@ -19,7 +19,7 @@
         cout<<M<<endl;
     }
     //Rogues Attack Function
-    void rogue::rogueAttack(Monster M){
+    void Rogue::rogueAttack(Monster M){
         int crit = rand() % 3;
         if(crit == 1){
             M.lowerHealth(attackValue*2);
@@ -32,13 +32,13 @@
         }
     }
     //Ambush Function
-    void rogue::ambush(Monster M){
+    void Rogue::ambush(Monster M){
         M.lowerHealth(attackValue*2);
         cout<< name << " Ambushed the "<< M<< " and scored a critical hit!!"<<endl;
         cout<< "The "<< M <<endl;
     }
     //Fireball Function
-    void wizard::fireball(vector<Monster> M){
+    void Wizard::fireball(vector<Monster> M){
         cout<<name<<" casts Fireball!!"<<endl;
         for(int i = 0; i< M.size();i++){
             M[i].lowerHealth(50);
@@ -47,12 +47,12 @@
     }
     
     //Refocus Function
-    void wizzard::refocus(){
+    void Wizzard::refocus(){
         numFireballs +=1
         cout<<name<<" Refocuses and gains another use of Fireball"<<endl;
     }
     //Heal Function
-    void priest::heal(vector<Adventurer> A){
+    void Priest::heal(vector<Adventurer> A){
         cout<<"Who do you want "<<name<<" to Heal?"<<endl;
         while (int i =0;i<A.size();i++){
             cout<<i+1<<". "<<A[i]<<endl;
@@ -68,7 +68,7 @@
      A[x].lowerHealth(-40);
     }
     //Heal All Function
-    void priest::healAll(vector<Adventurer> A){
+    void Priest::healAll(vector<Adventurer> A){
         while(int i = 0;)i<A.size();i++){
             A[i].lowerHealth(-15);
         }
