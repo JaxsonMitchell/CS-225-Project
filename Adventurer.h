@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include "Battler.h"
+#include "Monster.h"
 
 using namespace std;
 
