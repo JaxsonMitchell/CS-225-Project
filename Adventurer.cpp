@@ -5,17 +5,17 @@
 Adventure Class (Parent)
 
 *******************************************************************************/
-Adventurer::void lowerHealth(int x) {
-    currentHealth -= x;
+void Adventurer::lowerHealth(int x) {
+    currentHealth -= def * x;
 }
 
 
-Adventurer::string getName() {
+string Adventurer::getName() {
     return this->name;
 }
 
 
-Adventurer::ostream& operator<<(ostream& os, const Adventurer& adventurer) {
+ostream& operator<<(ostream& os, const Adventurer& adventurer) {
     os << adventurer.name << " has " << adventurer.currentHealth << " health left!";
     return os;
 }
@@ -26,7 +26,7 @@ Adventurer::ostream& operator<<(ostream& os, const Adventurer& adventurer) {
 Knight Class (Child)
 
 *******************************************************************************/
-Knight::void displayActions() {
+void Knight::displayActions() {
     cout << name << " the Knight Actions: "<< endl;
     cout << "1. Attack" << endl;
     cout << "2. Defend" << endl;
@@ -50,7 +50,7 @@ Knight::Knight(){
 Rogue Class (Class)
 
 *******************************************************************************/
-Rogue::void displayActions() {
+void Rogue::displayActions() {
 	cout << name << " the Rogue Actions: "<< endl;
 	cout << "1. Attack" << endl;
 	cout << "2. Defend" << endl;
@@ -77,7 +77,7 @@ Rogue::Rogue() {
 Wizard Class (Class)
 
 *******************************************************************************/
-void displayActions() {
+void Wizard::displayActions() {
 	cout << name << " the Wizard Actions: "<< endl;
 	cout << "1. Attack" << endl;
 	cout << "2. Defend" << endl;
@@ -85,7 +85,7 @@ void displayActions() {
 	cout << "4. Refocus" << endl;
 }
 
-Wizard() {
+Wizard::Wizard() {
 	cout << "Enter the name of your Wizard: ";
 	cin >> name;
 	ifstream myfile("Wizard_Art.txt");
@@ -103,7 +103,7 @@ Wizard() {
 Priest Class (Class)
 
 *******************************************************************************/
-Priest::void displayActions() {
+void Priest::displayActions() {
 	cout << name << " the Priest Actions: "<< endl;
 	cout << "1. Attack" << endl;
 	cout << "2. Defend" << endl;
@@ -122,5 +122,3 @@ Priest::Priest() {
 	}
 	currentHealth = 50;
 }
-
-
