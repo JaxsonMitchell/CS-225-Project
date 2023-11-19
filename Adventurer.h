@@ -16,6 +16,7 @@ class Adventurer : public Battler {
         int maxHealth = 100;
         int attackValue = 10;
         int currentHealth = 0;
+	int def = 1;
         string name;
     
     public:
