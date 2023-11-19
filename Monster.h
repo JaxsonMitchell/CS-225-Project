@@ -3,7 +3,7 @@
 #include <string>
 #include <climits>
 #include <time.h>
-
+#include "Adventurer.h"
 #include "Battler.h"
 
 using namespace std;
