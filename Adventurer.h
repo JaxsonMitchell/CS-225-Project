@@ -44,7 +44,7 @@ class Knight : public Adventurer {
     	const int attackValue = 10;
     	int currentHealth;
     public:
-    	void taunt();
+    	void bigSlash();
     	void displayActions();
     	Knight();
 };
