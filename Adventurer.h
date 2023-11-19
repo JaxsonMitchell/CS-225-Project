@@ -27,6 +27,7 @@ class Adventurer : public Battler {
         void basicAttack();
         void lowerHealth(int x);
         string getName();
+	int getHealth();
     
         // Overloading the << operator for ostream
         friend ostream& operator<<(ostream&, const Adventurer&);
