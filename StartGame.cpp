@@ -15,6 +15,33 @@
 #include "Monster.h"
 #include "Battler.h"
 
+void resetDefenseMultipliers(vector<Adventurer>& vec){
+    for (int i = 0; i < vec.size(); ++i){
+        vec[i].defense = 1;
+    }
+}
+
+
+template <class T>
+void removeIfNoHealth(std::vector<T>& vec) {
+    for (int i = 0; i < vec.size(); ++i) {
+        if (vec[i].getHealth() <= 0) {
+            vec.erase(vec.begin() + i);
+            --i;
+        }
+    }
+}
+
+
+bool neitherVectorsEmpty(vector<Adventurer>& party, vector<Monster>& enemies){
+    if (party.size() != 0 && enemies.size() != 0){
+        return true;
+    } else {
+        return false
+    }
+}
+
+
 class Battle {
     private:
         vector<Adventurer>& party;
@@ -29,14 +56,30 @@ class Battle {
             printf("\e[0;31m"); // Red font
             cout << "BATTLE BEGIN! FIGHT!" << endl;
             printf("\e[0m \n");
-
-            for (auto& adventurer : party) {
-                cout << adventurer.getName() << endl;
-            }
     
-            for (auto& monster : enemies) {
-                cout << monster.getName() << endl;
-            }
+            do{
+                // Resets defense multipliers at the beginning of the next turn.
+                resetDefenseMultipliers(party);
+                
+                // Iterates over Adventurers
+                for (auto& adventurer : party) {
+                    // Displays action.
+                    adventurer.displayAction();
+                    
+                    // Does action.
+                    adventurer.promptUserForAction(enemies);
+                }
+                
+                // Iterates over monsters
+                for (auto& monster : enemies) {
+                    // Randomly decides action
+                    monster.doAction(party);
+                }
+                
+                // Removes fighters if no health.
+                removeIfNoHealth(party);
+                removeIfNoHealth(monster);
+            } while(neitherVectorsEmpty(party, enemies));
         }
 };
 
@@ -49,6 +92,7 @@ void displayStringLikeText(string text, float rateOfMessage){
     }
     cout << endl;
 }
+
 
 int main()
 {
@@ -120,8 +164,6 @@ int main()
     vector<Monster> gnome({Gnomeageddon()});    
     Battle battle1(adventurers, gnome);
     battle1.fight();
-
-    
     
     return 0;
 }
