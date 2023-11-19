@@ -18,9 +18,10 @@ class Adventurer : public Battler {
         int attackValue = 10;
         int currentHealth = 0;
         string name;
-	int def = 1;
     public:
         // Using virtual to overload the operator later
+	int def = 1;
+	
         virtual void displayActions();
         void defend();
         void basicAttack();
