@@ -14,6 +14,9 @@ string Adventurer::getName() {
     return this->name;
 }
 
+int Adventurer::getHealth() {
+    return this->currentHealth;
+}
 
 ostream& operator<<(ostream& os, const Adventurer& adventurer) {
     os << adventurer.name << " has " << adventurer.currentHealth << " health left!";
