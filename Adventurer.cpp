@@ -18,9 +18,7 @@ int Adventurer::getHealth() {
     return this->currentHealth;
 }
 
-void Adventurer::defend(){
-	def -= 0.5;
-}
+
 
 ostream& operator<<(ostream& os, const Adventurer& adventurer) {
     os << adventurer.name << " has " << adventurer.currentHealth << " health left!";
