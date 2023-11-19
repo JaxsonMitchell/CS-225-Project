@@ -99,10 +99,6 @@ Gnomeageddon::void attack(vector<Adeventurer> A){
     cout<<A[x]<<endl;
 }
 
-Gnomeageddon::void lowerAttack(){
-    // Lowers attack stat
-}
-
 Gnomeageddon::void speakGnome(bool firstEncounter = false){
     string listOfPuns[4] = {
         "Mind your GNOME business!",
@@ -165,12 +161,17 @@ Ringleader::~Ringleader(){
     cout << "Ringleader: NO! MY CIRCUS!!" << endl;
 }
 
-Ringleader::void command(){
-    // Commands the lion to attack again.
+Ringleader::void command(vector<Monster> M,vector<Adventurer> A){
+    int x = rand() % A.size();
+    
+    
 }
 
-Ringleader::void attack(){
-    // Normal basic attack.
+Ringleader::void attack(vector<Adventurer> A){
+   int x = rand() % A.size();
+    A[x].lowerHealth(10);
+    cout<<"The Ringleader cracks his wip at "<<A[x].getName<<endl;
+    cout<<A[x]<<endl;
 }
 
 
