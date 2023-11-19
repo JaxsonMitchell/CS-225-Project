@@ -69,6 +69,9 @@ Monster::void lowerHealth(int healthDropped){
 Monster::string getName() {
     return this->monsterName;
 }
+Monster::int getHealth() {
+    return this->currentHealth;
+}
 
 Monster::ostream& operator<<(ostream& os, const Monster monster){
     os << monster.monsterName << " has " << monster.currentHealth << " health Left!";
@@ -215,7 +218,7 @@ Clown::void joke(vector<Adventurer A,vector<Monster> M){
         A[i].lowerHealth(5);
     }
     while(int i = 0; i<M.size(); i++){
-        M[i].lowerHealth();
+        M[i].lowerHealth(5);
     } 
     cout<<"The Clown gives everyone a headache and all combatants take 5 damage....."<<endl;
 }
@@ -235,12 +238,16 @@ CatInBoots::~CatInBoots(){
     cout << "Oof." << endl;
 }
 
-CatInBoots::void demoralize(){
-    // Demoralizes the opponents, makes their defense drop.
+CatInBoots::void demoralize(vector<Adventurer> A){
+    int x = rand() % A.size();
+    A[x].def += 1;
 }
 
 CatInBoots::void stab(){
-    // Basic stab attack
+    int x = rand() % A.size();
+    A[x].lowerHealth(20);
+    cout<<"Cat in Boots stabs "<<A[x].getName()<<" for 20 Damage!!"<<endl;
+    cout<<A[x]<<endl;
 }
 
 
@@ -259,12 +266,21 @@ NondescriptOgre(){
     cout << "Nondescript Ogre: *uhhh idk*";
 }
 
-void throwALog(){
+void throwALog(vector<Adventurer> A){
     // Throws a log deals splash damage.
+    while(int i = 0; i<A.size(); i++){
+        A[i].lowerHealth(10);
+    }
+    cout<<" The Non-Descript Ogre throws a log hitting the whole party!!!"<<endl;
+    
 }
 
-void roar(){
+void roar(vector<Adventurer> A){
     // Decreases opponents.
+    while(int i = 0; i < A.size(); i++){
+        A[i].def += 0.25;
+    }
+    cout<<" The Non-Descript Ogre Roars lowering the defense of the Adventurers!!"<<endl;
 }
 
 
@@ -282,9 +298,14 @@ Jackass::~Jackass(){
     cout << "INSERT DONKEY QUOTE" << endl;
 }
 
-Jackass::void annoy(){
-    // Donkey says literally anything and everyone gets annoyed at him
-    // And only attacks him until the beginning of the next turn.
+Jackass::void annoy(vector<Adventurer> A,vector<Monster> M){
+   while(int i = 0; i<A.size(); i++){
+        A[i].lowerHealth(5);
+    }
+    while(int i = 0; i<M.size(); i++){
+        M[i].lowerHealth(5);
+    }
+    cout<<"Jackass annoys everyone giving them a headache, everyone takes 5 damage...."<<endl;
 }
 
 
@@ -300,13 +321,21 @@ Dragon(){
     this->fireBreathCoolDown = 0;
 }
 
-void rend(){
+void rend(vector<Adventurer> A){
     // Implement basic dragon attack.
+    int x = rand() % A.size();
+    A[x].lowerHealth(30);
+    cout<<"The Dragon rends "<<A[x].getName()<<" for 30 Damage!!!"<<endl;
+    cout<<A[x]<<endl;
     this->fireBreathCoolDown--;
 }
 
-void fireBreath(){
+void fireBreath(vector<Adventurer> A){
     // Shoots a blast of fire.
+    while(int i = 0; i < A.size() ; i++){
+        A[i].lowerHealth(40);
+    }
+    cout<<"The Dragon Breaths Fire on all the Adventurers dealing 40 Damage!!!"<<endl;
     this->fireBreathCoolDown = 3;
 }
 
