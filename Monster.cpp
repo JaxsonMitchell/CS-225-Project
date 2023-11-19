@@ -165,6 +165,7 @@ Ringleader::void command(vector<Monster> M,vector<Adventurer> A){
     int x = rand() % A.size();
     while(int i = 0; i<M.size();i++){
         if(M[i].getName =="Lion"){
+            cout<<"The Ringleader cracks his wip and commands the Lion to attack!!!"<<endl;
             return M[i].pounce(A[x]);
         }
     }
@@ -194,7 +195,7 @@ Clown::~Clown(){
     "We're here all night! *comically stumbles over 32 geese*" << endl;
 }
         
-Clown::void joke(){
+Clown::void joke(vector<Adventurer A,vector<Monster> M){
     string listOfJokes[5] = {
         "I'm the jokester baby",
         "A bat walks into a bar... 'Why the long wings?'",
@@ -210,6 +211,13 @@ Clown::void joke(){
             
     int randomValue = randomNumber(0, 4);
     cout << listOfJokes[randomValue] << endl;
+    while(int i = 0; i<A.size(); i++){
+        A[i].lowerHealth(5);
+    }
+    while(int i = 0; i<M.size(); i++){
+        M[i].lowerHealth();
+    } 
+    cout<<"The Clown gives everyone a headache and all combatants take 5 damage....."<<endl;
 }
 
 
