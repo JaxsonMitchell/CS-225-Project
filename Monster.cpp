@@ -163,8 +163,12 @@ Ringleader::~Ringleader(){
 
 Ringleader::void command(vector<Monster> M,vector<Adventurer> A){
     int x = rand() % A.size();
-    
-    
+    while(int i = 0; i<M.size();i++){
+        if(M[i].getName =="Lion"){
+            return M[i].pounce(A[x]);
+        }
+    }
+    return attack(A[x]);
 }
 
 Ringleader::void attack(vector<Adventurer> A){
