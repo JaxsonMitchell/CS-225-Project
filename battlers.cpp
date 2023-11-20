@@ -196,7 +196,7 @@ void Wizard::refocus(){
 void Wizard::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& enemies) {
     int actionNum = getUserInput(1, 4, "What action will the wizard do? ");
     int len = enemies.size();
-    int i;  // Declare i outside the switch statement
+    int i;
 
     switch (actionNum) {
         case 1:
@@ -232,7 +232,7 @@ Priest::Priest() {
 	cin >> name;
 	
 	this->maxHealth = 60;
-    this->attackValue = 50;
+        this->attackValue = 50;
 	this->currentHealth = this->maxHealth;
 	
 	/*ifstream myfile("Priest_Art.txt");
@@ -297,14 +297,13 @@ int randomNumber(int lowerBound, int upperBound) {
     return rand() % (upperBound - lowerBound + 1) + lowerBound;
 }
 
-
 void promptUserUntilReceiveJoke1(){
     string prompt = "Knock Knock.";
     string response;
 
     cout << prompt << endl;
-    getline(cin, response);  // Captures whole line
-
+    getline(cin, response);
+	
     while (!cin || 
         !(response == "whos there" || response == "whos there." || 
         response == "whos there?" || response == "Who's There." || 
@@ -313,7 +312,7 @@ void promptUserUntilReceiveJoke1(){
         cin.ignore(INT_MAX, '\n');
         cout << "No. Incorrect!" << endl;
         cout << prompt << endl;
-        getline(cin, response);  // Change to getline here as well
+        getline(cin, response);
     }
 }
 
