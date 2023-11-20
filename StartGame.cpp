@@ -12,84 +12,9 @@
 #include <thread>
 #include <cmath>
 #include "battlers.h"
+#include "battle.h"
 
-void resetDefenseMultipliers(vector<Adventurer*>& vec){
-    for (int i = 0; i < vec.size(); ++i){
-        vec[i]->def = 1;
-    }
-}
-
-template <class T>
-void removeIfNoHealth(std::vector<T*>& vec) {
-    for (int i = 0; i < vec.size(); ++i) {
-        if (vec[i]->getHealth() <= 0) {
-            delete vec[i];
-            vec.erase(vec.begin() + i);
-            --i;
-        }
-    }
-}
-
-bool neitherVectorsEmpty(vector<Adventurer*>& party, vector<Monster*>& enemies){
-    if (party.size() != 0 && enemies.size() != 0){
-        return true;
-    } else {
-        return false;
-    }
-}
-
-class Battle {
-    private:
-        vector<Adventurer*>& party;
-        vector<Monster*>& enemies;
-
-    public:
-        Battle(vector<Adventurer*>& party, vector<Monster*>& enemies) : party(party), enemies(enemies) {}
-        
-        void fight(){
-            // Tests by iterating through the list.
-            cout << endl << endl;
-            printf("\e[0;31m"); // Red font
-            cout << "BATTLE BEGIN! FIGHT!" << endl;
-            printf("\e[0m \n");
-    
-            do{
-                // Resets defense multipliers at the beginning of the next turn.
-                resetDefenseMultipliers(party);
-                //print monster position numbers
-                
-                // Iterates over Adventurers
-                for (auto& adventurer : party) {
-                    // Displays action.
-                    adventurer->displayActions();
-                    
-                    // Does action.
-                    adventurer->promptUserForAction(party, enemies);
-                }
-                
-                // Iterates over monsters
-                for (auto& monster : enemies) {
-                    // Randomly decides action
-                    monster->doAction(party, enemies);
-                }
-                
-                // Removes fighters if no health.
-                removeIfNoHealth(party);
-                removeIfNoHealth(enemies);
-            } while(neitherVectorsEmpty(party, enemies));
-        }
-};
-
-
-void displayStringLikeText(string text, float rateOfMessage){
-    // Displays string text with a slight delay to emulate typing.
-    for (int i = 0; i < text.length(); i++){
-        cout << text[i] << flush;
-        this_thread::sleep_for(chrono::milliseconds(static_cast<int>(1000 / rateOfMessage)));
-    }
-    cout << endl;
-}
-
+using namespace std;
 
 int main()
 {
@@ -101,41 +26,42 @@ int main()
     sleep(2);
     cout<<"Four Adventures walk into the bar and the bartender says:"<<endl;
     sleep(3);
-    printf(" \e[0;33m"); //yellow font
+    printf("\e[0;33m"); //yellow font
     displayStringLikeText("Ay-yO WhAT are YE NAMEs?", 30);
     printf("\e[0m");
     
-    Wizard wizard;
-    Knight knight;
-    Rogue rogue;
-    Priest priest;
+    Wizard* wizard = new Wizard;
+    Knight* knight = new Knight;
+    Rogue* rogue = new Rogue;
+    Priest* priest = new Priest;
+
     
     vector<Adventurer*> adventurers;
-    adventurers.push_back(new Wizard);
-    adventurers.push_back(new Knight);
-    adventurers.push_back(new Rogue);
-    adventurers.push_back(new Priest);
+    adventurers.push_back(wizard);
+    adventurers.push_back(knight);
+    adventurers.push_back(rogue);
+    adventurers.push_back(priest);
 
-    printf(" \e[0;33m \n"); //yellow font
+    printf("\e[0;33m \n"); //yellow font
     displayStringLikeText("ThAts...", 30);
     sleep(1);
     displayStringLikeText("...nice...", 30);
     sleep(1);
     displayStringLikeText("Any ways. It appeares that I have lost my", 30);
-    printf(" \e[1;35m"); //purple font
+    printf("\e[1;35m"); //purple font
     displayStringLikeText("SALT SHAKER!", 5);
     printf("\e[0;33m"); //yellow font
     displayStringLikeText("Would you be kind enough to find it for me?", 30);
     printf("\e[0m \n");
    
-    cout<< knight.getName() << " the knight replies with a kind ";
-    printf("\e[0;36m"); //yellow font
+    cout<< knight->getName() << " the knight replies with ";
+    printf("\e[0;36m"); //blue font
     displayStringLikeText("What..? Salt..? Of course not.", 10);
     
     
     printf("\e[0;33m"); //yellow font
     displayStringLikeText("Why thank YE for accepting my quest to find the", 30);
-    printf(" \e[1;35m"); //purple font
+    printf("\e[1;35m"); //purple font
     displayStringLikeText("SALT SHAKER!", 5);
     printf("\e[0;33m"); //yellow font
     displayStringLikeText("Better be on your way then", 30);
@@ -164,6 +90,78 @@ int main()
 
     Battle battle1(adventurers, gnome);
     battle1.fight();
+    cout << endl << endl;
+    cout << rogue->getName() << ":";
+    printf("\e[0;36m"); //blue font
+    displayStringLikeText("Wow, let's hope nothing else bad happens! ", 15);
+    printf("\e[0m \n");
+
+    cout << priest->getName() << ":";
     
+    printf("\e[0;36m"); //blue font
+    displayStringLikeText("DON'T SAY THAT!", 15);
+    printf("\e[0m \n");
+
+    sleep(1);
+    cout << "The adventurers trip on 32 geese and stumble into the circus..?" << endl;
+    cout << "Ringleader:";
+    
+    printf("\e[0;31m"); // Red font
+    displayStringLikeText("Well well well... what do we have here?", 10);
+    printf("\e[0m \n");
+
+    cout << "Not The Joker:";
+    
+    printf("\e[0;31m"); // Red font
+    displayStringLikeText("Why HELLO! Why... So... SERIOUS!", 10);
+    printf("\e[0m \n");
+
+    vector<Monster*> circus;
+
+    Lion* lion = new Lion;
+    Ringleader* ringleader = new Ringleader;
+    Clown* clown = new Clown;
+    
+    circus.push_back(lion);
+    circus.push_back(ringleader);
+    circus.push_back(clown);
+    Battle battle2(adventurers, circus);
+    battle2.fight();
+    
+    sleep(2);
+    cout << "The adventurers escape all the cringey jokes and stumble upon...";
+    cout << wizard->getName() << ":";
+    
+    printf("\e[0;36m"); //blue font
+    displayStringLikeText("Is that a salt shaker??!", 15);
+    printf("\e[0m \n");
+    
+    sleep(1);
+    cout << "The adventurers all went to grab the salt shaker on the floor of the circus!" << endl;
+    sleep(1);
+    cout << knight->getName() << " grabs the salt shaker, but trips on a goose!" << endl;
+    cout << knight->getName() << ":";
+    printf("\e[0;36m"); //blue font
+    displayStringLikeText("OOOOOOOOOPS", 60);
+    printf("\e[0m \n");
+    cout << "The salt shaker shatters into millions of pieces on the floor..." << endl;
+    cout << knight->getName() << ":";
+    
+    sleep(3);
+    printf("\e[0;36m"); //blue font
+    displayStringLikeText("F@CK", 2);
+    printf("\e[0m \n");
+    
+    cout << "The adventurers all stare in awe at the broken salt shaker." << endl;
+    sleep(3);
+
+    cout << knight->getName() << ":";
+    printf("\e[1;36m"); //blue font
+    displayStringLikeText("I'm going home y'all", 20);
+    printf("\e[0m \n");
+
+    printf("\e[1;31m"); //red font
+    displayStringLikeText("--- THE END ---", 3);
+
     return 0;
 }
