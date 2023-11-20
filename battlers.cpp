@@ -64,7 +64,9 @@ void Knight::displayActions() {
 Knight::Knight(){
     cout << "Enter the name of your Knight: ";
     cin >> name;
-    
+    this->maxHealth = 130;
+    this->attackValue = 20;
+    this->currentHealth = this->maxHealth;
     /*ifstream myfile ("Knight_Art.txt");
     char art;
     while (myfile) {
@@ -111,13 +113,16 @@ void Rogue::displayActions() {
 Rogue::Rogue() {
 	cout << "Enter the name of your Rogue: ";
 	cin >> name;
+	this->maxHealth = 100;
+    this->attackValue = 20;
+	this->currentHealth = this->maxHealth;
+
 	/*ifstream myfile("Rogue_Art.txt");
 	char art;
 	while (myfile) {
 		art = myfile.get();
 		cout << art;
     }*/
-    currentHealth = 75;
 	critChance = 1;
 }
 
@@ -162,13 +167,16 @@ void Wizard::displayActions() {
 Wizard::Wizard() {
 	cout << "Enter the name of your Wizard: ";
 	cin >> name;
+	this->maxHealth = 60;
+    this->attackValue = 50;
+	this->currentHealth = this->maxHealth;
 	/*ifstream myfile("Wizard_Art.txt");
 	char art;
 	while (myfile) {
 		art = myfile.get();
 		cout << art;
 	}*/
-	currentHealth = 50;
+	this->currentHealth = this->maxHealth;
 	numFireballs = 2;
 }
 
@@ -222,13 +230,17 @@ void Priest::displayActions() {
 Priest::Priest() {
 	cout << "Enter the name of your Priest: ";
 	cin >> name;
+	
+	this->maxHealth = 60;
+    this->attackValue = 50;
+	this->currentHealth = this->maxHealth;
+	
 	/*ifstream myfile("Priest_Art.txt");
 	char art;
 	while (myfile) {
 		art = myfile.get();
 		cout << art;
 	}*/
-	currentHealth = 50;
 }
 
 void Priest::heal(vector<Adventurer*>& A){
@@ -300,7 +312,7 @@ void promptUserUntilReceiveJoke1(){
         cin.clear();
         cin.ignore(INT_MAX, '\n');
         cout << "No. Incorrect!" << endl;
-        cout << prompt;
+        cout << prompt << endl;
         getline(cin, response);  // Change to getline here as well
     }
 }
@@ -327,7 +339,7 @@ void promptUserUntilReceiveJoke2(){
         cin.clear();
         cin.ignore(INT_MAX, '\n');
         cout << "No. Incorrect!" << endl;
-        cout << prompt;
+        cout << prompt << endl;
         getline(cin, response);
     }
 }
@@ -470,7 +482,6 @@ void Ringleader::attack(vector<Adventurer*>& A){
     cout<< *A[x]<<endl;
 }
 
-
 void Ringleader::doAction(vector<Adventurer*>& party, vector<Monster*>& monsters) {
     command(monsters, party);
 }
@@ -513,6 +524,8 @@ void Clown::joke(vector<Adventurer*>& A, vector<Monster*>& M){
     for (int i = 0; i<M.size(); i++){
         M[i]->lowerHealth(5);
     } 
+    cout << "Clown:";
+    
     cout<<"The Clown gives everyone a headache and all combatants take 5 pyschic damage....."<<endl;
 }
 
