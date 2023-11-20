@@ -11,44 +11,40 @@
 #include <chrono>
 #include <thread>
 #include <cmath>
-#include "Adventurer.h"
-#include "Monster.h"
-#include "Battler.h"
+#include "battlers.h"
 
-void resetDefenseMultipliers(vector<Adventurer>& vec){
+void resetDefenseMultipliers(vector<Adventurer*>& vec){
     for (int i = 0; i < vec.size(); ++i){
-        vec[i].defense = 1;
+        vec[i]->def = 1;
     }
 }
 
-
 template <class T>
-void removeIfNoHealth(std::vector<T>& vec) {
+void removeIfNoHealth(std::vector<T*>& vec) {
     for (int i = 0; i < vec.size(); ++i) {
-        if (vec[i].getHealth() <= 0) {
+        if (vec[i]->getHealth() <= 0) {
+            delete vec[i];
             vec.erase(vec.begin() + i);
             --i;
         }
     }
 }
 
-
-bool neitherVectorsEmpty(vector<Adventurer>& party, vector<Monster>& enemies){
+bool neitherVectorsEmpty(vector<Adventurer*>& party, vector<Monster*>& enemies){
     if (party.size() != 0 && enemies.size() != 0){
         return true;
     } else {
-        return false
+        return false;
     }
 }
 
-
 class Battle {
     private:
-        vector<Adventurer>& party;
-        vector<Monster>& enemies;
+        vector<Adventurer*>& party;
+        vector<Monster*>& enemies;
 
     public:
-        Battle(vector<Adventurer>& party, vector<Monster>& enemies) : party(party), enemies(enemies) {}
+        Battle(vector<Adventurer*>& party, vector<Monster*>& enemies) : party(party), enemies(enemies) {}
         
         void fight(){
             // Tests by iterating through the list.
@@ -60,25 +56,26 @@ class Battle {
             do{
                 // Resets defense multipliers at the beginning of the next turn.
                 resetDefenseMultipliers(party);
+                //print monster position numbers
                 
                 // Iterates over Adventurers
                 for (auto& adventurer : party) {
                     // Displays action.
-                    adventurer.displayAction();
+                    adventurer->displayActions();
                     
                     // Does action.
-                    adventurer.promptUserForAction(enemies);
+                    adventurer->promptUserForAction(party, enemies);
                 }
                 
                 // Iterates over monsters
                 for (auto& monster : enemies) {
                     // Randomly decides action
-                    monster.doAction(party);
+                    monster->doAction(party, enemies);
                 }
                 
                 // Removes fighters if no health.
                 removeIfNoHealth(party);
-                removeIfNoHealth(monster);
+                removeIfNoHealth(enemies);
             } while(neitherVectorsEmpty(party, enemies));
         }
 };
@@ -98,7 +95,6 @@ int main()
 {
     // Initialization and seeding a random number generator.
     srand(time(NULL));
-    string reply;
     int i;
     
     cout<<"Once upon a time..."<<endl;
@@ -114,12 +110,12 @@ int main()
     Rogue rogue;
     Priest priest;
     
-    vector<Adventurer> adventurers;
-    adventurers.push_back(wizard);
-    adventurers.push_back(knight);
-    adventurers.push_back(rogue);
-    adventurers.push_back(priest);
-    
+    vector<Adventurer*> adventurers;
+    adventurers.push_back(new Wizard);
+    adventurers.push_back(new Knight);
+    adventurers.push_back(new Rogue);
+    adventurers.push_back(new Priest);
+
     printf(" \e[0;33m \n"); //yellow font
     displayStringLikeText("ThAts...", 30);
     sleep(1);
@@ -148,10 +144,10 @@ int main()
     
     cout<<"and so";
     for (i = 0; i < (adventurers.size() - 1); i++) {
-        cout<<" "<<adventurers[i].getName()<<",";
+        cout<<" "<<adventurers[i]->getName()<<",";
         
     }
-    cout<<" and "<<adventurers[i].getName()
+    cout<<" and "<<adventurers[i]->getName()
         <<" all walk out of the bar and into..."<<endl;
     
     sleep(2);
@@ -161,7 +157,11 @@ int main()
     printf("\e[0m"); // Resets
     cout << "The gnomes coalesce into a monstrosity never gazed upon by mankind." << endl;
     
-    vector<Monster> gnome({Gnomeageddon()});    
+    Gnomeageddon* gnomes = new Gnomeageddon;
+    
+    vector<Monster*> gnome;
+    gnome.push_back(gnomes);
+
     Battle battle1(adventurers, gnome);
     battle1.fight();
     
