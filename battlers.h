@@ -1,5 +1,3 @@
-// battlers.h
-
 #pragma once
 #include <string>
 #include <iostream>
@@ -16,9 +14,9 @@ Adventure Class (Parent)
 *******************************************************************************/
 class Adventurer {
 protected:
-    int maxHealth = 100;
-    int attackValue = 10;
-    int currentHealth = 0;
+    int maxHealth;
+    int attackValue;
+    int currentHealth;
     string name;
 
 public:
@@ -50,11 +48,6 @@ public:
 Knight Class (Child)
 *******************************************************************************/
 class Knight : public Adventurer {
-private:
-    const int maxHealth = 100;
-    const int attackValue = 10;
-    int currentHealth;
-
 public:
     void promptUserForAction(vector<Adventurer*>& adventurers, vector<Monster*>& monsters) override;
     void displayActions() override;
@@ -68,11 +61,7 @@ Rogue Class (Child)
 *******************************************************************************/
 class Rogue : public Adventurer {
 private:
-    const int maxHealth = 75;
-    const int attackValue = 20;
-    int currentHealth;
     double critChance;
-
 public:
     Rogue();
     void rogueAttack(Monster&);
@@ -86,11 +75,7 @@ Wizard Class (Child)
 *******************************************************************************/
 class Wizard : public Adventurer {
 private:
-    const int maxHealth = 50;
-    const int attackValue = 25;
-    int currentHealth;
     int numFireballs;
-
 public:
     void promptUserForAction(vector<Adventurer*>& adventurers, vector<Monster*>& monsters) override;
     void fireball(vector<Monster*>& monsters);
@@ -103,11 +88,6 @@ public:
 Priest Class (Child)
 *******************************************************************************/
 class Priest : public Adventurer {
-private:
-    const int maxHealth = 50;
-    const int attackValue = 5;
-    int currentHealth;
-
 public:
     void promptUserForAction(vector<Adventurer*>& adventurers, vector<Monster*>& monsters) override;
     void heal(vector<Adventurer*>& adventurers);
