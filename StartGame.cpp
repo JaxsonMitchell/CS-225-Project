@@ -130,14 +130,39 @@ int main()
     
     sleep(2);
     cout << "The adventurers escape all the cringey jokes and stumble upon...";
-    cout << wizard->getName() << ":";
+
+
+    vector<Monster> swamp;
     
+    CatInBoots* cat = new CatInBoots;
+    NondescriptOgre* ogre = new NondescriptOgre;
+    Jackass* jackass = new Jackass;
+
+    swamp.push_back(cat);
+    swamp.push_back(ogre);
+    swamp.push_back(jackass);
+    Battle battle3(adventurers, swamp);
+    battle3.fight();
+
+
+
+
+    
+    vector<Monster> dragon;
+
+    Dragon* dragon = new Dragon;
+    dragon.push_back(dragon);
+    Battle battle4(adventurer,dragon);
+    battle4.fight();
+
+    
+    cout << wizard->getName() << ":";
     printf("\e[0;36m"); //blue font
     displayStringLikeText("Is that a salt shaker??!", 15);
     printf("\e[0m \n");
     
     sleep(1);
-    cout << "The adventurers all went to grab the salt shaker on the floor of the circus!" << endl;
+    cout << "The adventurers all went to grab the salt shaker in the Dragons Horde!" << endl;
     sleep(1);
     cout << knight->getName() << " grabs the salt shaker, but trips on a goose!" << endl;
     cout << knight->getName() << ":";
