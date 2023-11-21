@@ -19,6 +19,15 @@ int getUserInput(int lowerBound, int upperBound, const string& promptMessage) {
     return userInput;
 }
 
+
+string testName(string nameinput) {
+    for (int i = 0; i < nameinput.length(); i++) {
+    if(isdigit(nameinput[i]))
+        throw (1);
+    }
+    return nameinput;
+}
+
 /*******************************************************************************
 Adventure Class (Parent)
 *******************************************************************************/
@@ -62,8 +71,20 @@ void Knight::displayActions() {
 }
 
 Knight::Knight(){
+    
     cout << "Enter the name of your Knight: ";
-    cin >> name;
+    
+    string newName;
+    getline(cin >> ws, newName);
+    try {
+        name = testName(newName);
+    }
+    catch (int i) {
+        cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
+        cout<<"GAME OVER!!!"<<endl;
+        exit(1);
+    }
+    
     this->maxHealth = 130;
     this->attackValue = 20;
     this->currentHealth = this->maxHealth;
@@ -87,7 +108,7 @@ void Knight::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 
     switch (actionNum) {
         case 1:
-            i = getUserInput(1, len + 1, "Who will the knight attack?");
+            i = getUserInput(1, len + 1, "Who will the knight attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
         case 2:
@@ -111,19 +132,29 @@ void Rogue::displayActions() {
 
 
 Rogue::Rogue() {
-	cout << "Enter the name of your Rogue: ";
-	cin >> name;
-	this->maxHealth = 100;
+    cout << "Enter the name of your Rogue: ";
+	
+    string newName;
+    getline(cin >> ws, newName);
+    try {
+        name = testName(newName);
+    }
+    catch (int i) {
+        cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
+        cout<<"GAME OVER!!!"<<endl;
+        exit(1);
+    }
+    this->maxHealth = 100;
     this->attackValue = 20;
-	this->currentHealth = this->maxHealth;
+    this->currentHealth = this->maxHealth;
 
-	/*ifstream myfile("Rogue_Art.txt");
-	char art;
-	while (myfile) {
-		art = myfile.get();
-		cout << art;
+    /*ifstream myfile("Rogue_Art.txt");
+    char art;
+    while (myfile) {
+    art = myfile.get();
+    cout << art;
     }*/
-	critChance = 1;
+    critChance = 1;
 }
 
 void Rogue::rogueAttack(Monster& M){
@@ -145,7 +176,7 @@ void Rogue::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& en
 
     switch (actionNum) {
         case 1:
-            i = getUserInput(1, len + 1, "Who will the rogue attack?");
+            i = getUserInput(1, len + 1, "Who will the rogue attack? ");
             rogueAttack(*(enemies[i - 1]));
             break;
         case 2:
@@ -166,7 +197,18 @@ void Wizard::displayActions() {
 
 Wizard::Wizard() {
 	cout << "Enter the name of your Wizard: ";
-	cin >> name;
+
+    string newName;
+    getline(cin >> ws, newName);
+    try {
+        name = testName(newName);
+    }
+    catch (int i) {
+        cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
+        cout<<"GAME OVER!!!"<<endl;
+        exit(1);
+    }
+    
 	this->maxHealth = 60;
     this->attackValue = 50;
 	this->currentHealth = this->maxHealth;
@@ -200,7 +242,7 @@ void Wizard::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 
     switch (actionNum) {
         case 1:
-            i = getUserInput(1, len + 1, "Who will the wizard attack?");
+            i = getUserInput(1, len + 1, "Who will the wizard attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
         case 2:
@@ -229,7 +271,17 @@ void Priest::displayActions() {
 
 Priest::Priest() {
 	cout << "Enter the name of your Priest: ";
-	cin >> name;
+	
+	string newName;
+    getline(cin >> ws, newName);
+    try {
+        name = testName(newName);
+    }
+    catch (int i) {
+        cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
+        cout<<"GAME OVER!!!"<<endl;
+        exit(1);
+    }
 	
 	this->maxHealth = 60;
         this->attackValue = 50;
@@ -274,7 +326,7 @@ void Priest::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 
     switch (actionNum) {
         case 1:
-            i = getUserInput(1, len + 1, "Who will the priest attack?");
+            i = getUserInput(1, len + 1, "Who will the priest attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
         case 2:
