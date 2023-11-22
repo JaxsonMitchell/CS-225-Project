@@ -129,9 +129,22 @@ int main()
     battle2.fight();
     
     sleep(2);
-    cout << "The adventurers escape all the cringey jokes and stumble upon...";
+    cout << "The adventurers escape all the cringey jokes and stumble into..." << endl;
+    sleep(2);
+    cout << "A Swamp?" << endl;
+    sleep(1);
+    cout << "After wandering the swamp for a while the party is approached by the figures." << endl;
 
+    cout << "Non-Descript Ogre:"
+    printf("\e[0;31m"); // Red font
+    displayStringLikeText("Look at what we have here, a group of Adventurers in MY SWAMP, you must be looking for that barkeeps Salt Shaker.", 10);
+    printf("\e[0m \n");
 
+    cout << "Non-Descript Ogre:"
+    printf("\e[0;31m"); // Red font
+    displayStringLikeText("Well you can't have it, this is MY SWAMP and you are tresspassing, and tresspassers make a great stew.", 10);
+    printf("\e[0m \n");
+    
     vector<Monster> swamp;
     
     CatInBoots* cat = new CatInBoots;
