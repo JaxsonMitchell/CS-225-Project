@@ -135,17 +135,17 @@ int main()
     sleep(1);
     cout << "After wandering the swamp for a while the party is approached by the figures." << endl;
 
-    cout << "Non-Descript Ogre:"
+    cout << "Non-Descript Ogre:";
     printf("\e[0;31m"); // Red font
     displayStringLikeText("Look at what we have here, a group of Adventurers in MY SWAMP, you must be looking for that barkeeps Salt Shaker.", 10);
     printf("\e[0m \n");
 
-    cout << "Non-Descript Ogre:"
+    cout << "Non-Descript Ogre:";
     printf("\e[0;31m"); // Red font
     displayStringLikeText("Well you can't have it, this is MY SWAMP and you are tresspassing, and tresspassers make a great stew.", 10);
     printf("\e[0m \n");
     
-    vector<Monster> swamp;
+    vector<Monster*> swamp;
     
     CatInBoots* cat = new CatInBoots;
     NondescriptOgre* ogre = new NondescriptOgre;
@@ -161,11 +161,11 @@ int main()
 
 
     
-    vector<Monster> dragon;
+    vector<Monster*> dragonDen;
 
     Dragon* dragon = new Dragon;
-    dragon.push_back(dragon);
-    Battle battle4(adventurer,dragon);
+    dragonDen.push_back(dragon);
+    Battle battle4(adventurers,dragonDen);
     battle4.fight();
 
     
