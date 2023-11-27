@@ -12,6 +12,12 @@ void displayStringLikeText(string text, float rateOfMessage) {
     cout << endl;
 }
 
+void gameOver() {
+    printf("\e[0;31m"); // Red font
+    displayStringLikeText("GAME OVER!!!",5);
+    exit(1);
+}
+
 int getUserInput(int lowerBound, int upperBound, const string& promptMessage) {
     int userInput;
     do {
@@ -90,8 +96,7 @@ Knight::Knight(){
     }
     catch (int i) {
         cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
-        cout<<"GAME OVER!!!"<<endl;
-        exit(1);
+        gameOver();
     }
     
     this->maxHealth = 130;
@@ -151,8 +156,7 @@ Rogue::Rogue() {
     }
     catch (int i) {
         cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
-        cout<<"GAME OVER!!!"<<endl;
-        exit(1);
+        gameOver();
     }
     this->maxHealth = 100;
     this->attackValue = 20;
@@ -216,8 +220,7 @@ Wizard::Wizard() {
     }
     catch (int i) {
         cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
-        cout<<"GAME OVER!!!"<<endl;
-        exit(1);
+        gameOver();
     }
     
 	this->maxHealth = 60;
@@ -291,8 +294,7 @@ Priest::Priest() {
     }
     catch (int i) {
         cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
-        cout<<"GAME OVER!!!"<<endl;
-        exit(1);
+        gameOver();
     }
 	
 	this->maxHealth = 60;
