@@ -11,6 +11,10 @@
 using namespace std;
 void displayStringLikeText(string text, float rateOfMessage);
 void gameOver();
+
+template <class T>
+void printOutAllMembers(vector<T*>& vec);
+
 class Monster;
 class Adventurer;
 
