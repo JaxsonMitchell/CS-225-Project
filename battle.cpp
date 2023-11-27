@@ -71,7 +71,7 @@ void Battle::fight() {
         printf("\e[0m");
     } while (neitherVectorsEmpty(party, enemies));
 }
-
+/**
 void displayStringLikeText(string text, float rateOfMessage) {
     for (int i = 0; i < text.length(); i++) {
         cout << text[i] << flush;
@@ -79,3 +79,4 @@ void displayStringLikeText(string text, float rateOfMessage) {
     }
     cout << endl;
 }
+**/
