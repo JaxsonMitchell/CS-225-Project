@@ -31,13 +31,18 @@ bool neitherVectorsEmpty(vector<Adventurer*>& party, vector<Monster*>& enemies) 
     return (party.size() != 0 && enemies.size() != 0);
 }
 
+/*******************************************************************************
+ * Battle classs
+*******************************************************************************/
 Battle::Battle(vector<Adventurer*>& party, vector<Monster*>& enemies) : party(party), enemies(enemies) {}
 
 void Battle::fight() {
+    sleep(2);
     cout << endl << endl;
     printf("\e[0;31m"); // Red font
     cout << "BATTLE BEGIN! FIGHT!" << endl;
     printf("\e[0m \n");
+    sleep(2);
 
     do {
         resetDefenseMultipliers(party);
@@ -46,37 +51,36 @@ void Battle::fight() {
         printf("\e[0;32m"); // Green font
         printOutAllMembers(party);
         printf("\e[0m");
+        sleep(3);
 
         cout << endl;
         printf("\e[0;31m"); // Red font
         printOutAllMembers(enemies);
         printf("\e[0m");
-
-        printf("\e[0;35m"); // Purple font
+        sleep(3);
+        
         for (auto& adventurer : party) {
-            adventurer->displayActions();
-            adventurer->promptUserForAction(party, enemies);
+            if (enemies.size() != 0) {
+                adventurer->displayActions();
+                adventurer->promptUserForAction(party, enemies);
+                removeIfNoHealth(party);
+                removeIfNoHealth(enemies);
+            }
         }
-        printf("\e[0m");
-
+        
         printf("\e[0;36m"); // Red font
         for (auto& monster : enemies) {
+            if (party.size() == 0) {
+                printf("\e[0;31m"); // Red font
+                cout<<"Party is dead"<<endl;
+                gameOver();
+            }
             monster->doAction(party, enemies);
             cout << endl;
+            removeIfNoHealth(party);
+            removeIfNoHealth(enemies);
             sleep(2);
         }
-
-        removeIfNoHealth(party);
-        removeIfNoHealth(enemies);
         printf("\e[0m");
     } while (neitherVectorsEmpty(party, enemies));
 }
-/**
-void displayStringLikeText(string text, float rateOfMessage) {
-    for (int i = 0; i < text.length(); i++) {
-        cout << text[i] << flush;
-        this_thread::sleep_for(chrono::milliseconds(static_cast<int>(1000 / rateOfMessage)));
-    }
-    cout << endl;
-}
-**/
