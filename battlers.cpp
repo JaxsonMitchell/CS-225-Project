@@ -18,6 +18,14 @@ void gameOver() {
     exit(1);
 }
 
+template <class T>
+void printOutAllMembers(vector<T*>& vec) {
+    for (int i = 0; i < vec.size(); ++i) {
+        cout << i + 1 << ". " << *vec[i] << endl;
+        cout << "----------------------------" << endl;
+    }
+}
+
 int getUserInput(int lowerBound, int upperBound, const string& promptMessage) {
     int userInput;
     do {
@@ -66,7 +74,9 @@ ostream& operator<<(ostream& os, const Adventurer& adventurer) {
 //Basic Attack Function
 void Adventurer::basicAttack(Monster& M){
     M.lowerHealth(this->attackValue);
-    cout << M << endl;
+    printf("\e[0;31m");
+    cout<<endl<<M<<endl;
+    printf("\e[0m");
 }
 
 void Adventurer::defend(){
@@ -112,7 +122,9 @@ Knight::Knight(){
 
 void Knight::bigSlash(Monster& M){
     M.lowerHealth(attackValue * 1.5);
-    cout<< M <<endl;
+    printf("\e[0;31m");
+    cout<<endl<<M<<endl;
+    printf("\e[0m");
 }
 
 void Knight::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& enemies) {
@@ -122,6 +134,10 @@ void Knight::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 
     switch (actionNum) {
         case 1:
+            cout<<endl;
+            printf("\e[0;31m"); // Red font
+            printOutAllMembers(enemies);
+            printf("\e[0m");
             i = getUserInput(1, len + 1, "Who will the knight attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
@@ -129,6 +145,10 @@ void Knight::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
             defend();
             break;
         case 3:
+            cout<<endl;
+            printf("\e[0;31m"); // Red font
+            printOutAllMembers(enemies);
+            printf("\e[0m");
             i = getUserInput(1, len + 1, "Who will the knight use Big Slash on? ");
             bigSlash(*(enemies[i - 1]));
             break;
@@ -176,10 +196,14 @@ void Rogue::rogueAttack(Monster& M){
     if(crit == 1){
         M.lowerHealth(attackValue*2);
         cout<<name<<" Scored a critical hit!!"<<endl;
-        cout<<"The "<<M<<endl;
+        printf("\e[0;31m");
+        cout<< M <<endl;
+        printf("\e[0m");
     }else{
         M.lowerHealth(attackValue);
-        cout<<"The "<<M<<endl;
+        printf("\e[0;31m");
+        cout<< M <<endl;
+        printf("\e[0m");
     }
 }
 
@@ -190,6 +214,10 @@ void Rogue::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& en
 
     switch (actionNum) {
         case 1:
+            cout<<endl;
+            printf("\e[0;31m"); // Red font
+            printOutAllMembers(enemies);
+            printf("\e[0m");
             i = getUserInput(1, len + 1, "Who will the rogue attack? ");
             rogueAttack(*(enemies[i - 1]));
             break;
@@ -256,6 +284,10 @@ void Wizard::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 
     switch (actionNum) {
         case 1:
+            cout<<endl;
+            printf("\e[0;31m"); // Red font
+            printOutAllMembers(enemies);
+            printf("\e[0m");
             i = getUserInput(1, len + 1, "Who will the wizard attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
@@ -310,10 +342,7 @@ Priest::Priest() {
 }
 
 void Priest::heal(vector<Adventurer*>& A){
-    cout<<"Who do you want "<<name<<" to Heal?"<<endl;
-    for(int i =0;i<A.size();i++){
-        cout<<i+1<<". "<< *A[i]<<endl;
-    }
+    cout<<"Who do you want "<<name<<" to Heal? ";
     int x;
     cin >> x;
     while (!cin or x>4 or x<1) {
@@ -322,7 +351,10 @@ void Priest::heal(vector<Adventurer*>& A){
     	cout << "Error. Please enter 1-4";
     	cin >> x;
     }
-    A[x]->lowerHealth(-40);
+    A[x - 1]->lowerHealth(-40);
+    printf("\e[0;32m"); // Green font
+    cout<<A[x - 1]->getName()<<" now has "<< A[x - 1]->getHealth()<<" health"<< endl;
+    printf("\e[0m");
 }
 
 //Heal All Function
@@ -340,6 +372,10 @@ void Priest::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 
     switch (actionNum) {
         case 1:
+            cout<<endl;
+            printf("\e[0;31m"); // Red font
+            printOutAllMembers(enemies);
+            printf("\e[0m");
             i = getUserInput(1, len + 1, "Who will the priest attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
@@ -347,6 +383,10 @@ void Priest::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
             defend();
             break;
         case 3:
+            cout<<endl;
+            printf("\e[0;32m"); // Green font
+            printOutAllMembers(party);
+            printf("\e[0m");
             heal(party);
             break;
         case 4:
