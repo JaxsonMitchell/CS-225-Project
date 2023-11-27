@@ -8,9 +8,6 @@
 #include <algorithm>
 #include <stdio.h>
 #include <unistd.h>
-#include <chrono>
-#include <thread>
-#include <cmath>
 #include "battlers.h"
 #include "battle.h"
 
@@ -67,7 +64,7 @@ int main()
     displayStringLikeText("Better be on your way then", 30);
     displayStringLikeText("Bye bye!!", 100);
     printf("\e[0m \n");
-    
+
     cout<<"and so";
     for (i = 0; i < (adventurers.size() - 1); i++) {
         cout<<" "<<adventurers[i]->getName()<<",";
@@ -87,7 +84,9 @@ int main()
     
     vector<Monster*> gnome;
     gnome.push_back(gnomes);
-
+/*******************************************************************************
+ * Start of battle 1
+*******************************************************************************/
     Battle battle1(adventurers, gnome);
     battle1.fight();
     cout << endl << endl;
@@ -101,18 +100,21 @@ int main()
     printf("\e[0;36m"); //blue font
     displayStringLikeText("DON'T SAY THAT!", 15);
     printf("\e[0m \n");
+/*******************************************************************************
+ * End of battle 1
+*******************************************************************************/
 
     sleep(1);
     cout << "The adventurers trip on 32 geese and stumble into the circus..?" << endl;
     cout << "Ringleader:";
     
-    printf("\e[0;31m"); // Red font
+    printf("\e[2;31m"); // Red font
     displayStringLikeText("Well well well... what do we have here?", 10);
     printf("\e[0m \n");
 
     cout << "Not The Joker:";
     
-    printf("\e[0;31m"); // Red font
+    printf("\e[1;31m"); // Red font
     displayStringLikeText("Why HELLO! Why... So... SERIOUS!", 10);
     printf("\e[0m \n");
 
@@ -125,11 +127,17 @@ int main()
     circus.push_back(lion);
     circus.push_back(ringleader);
     circus.push_back(clown);
+    
+/*******************************************************************************
+ * Start of battle 2
+*******************************************************************************/
     Battle battle2(adventurers, circus);
     battle2.fight();
-    
     sleep(2);
     cout << "The adventurers escape all the cringey jokes and stumble into..." << endl;
+/*******************************************************************************
+ * End of battle 2
+*******************************************************************************/
     sleep(2);
     cout << "A Swamp?" << endl;
     sleep(1);
