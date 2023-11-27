@@ -10,6 +10,7 @@
 
 using namespace std;
 void displayStringLikeText(string text, float rateOfMessage);
+void gameOver();
 class Monster;
 class Adventurer;
 
