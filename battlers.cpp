@@ -4,6 +4,14 @@
 Helper functions
 *******************************************************************************/
 
+void displayStringLikeText(string text, float rateOfMessage) {
+    for (int i = 0; i < text.length(); i++) {
+        cout << text[i] << flush;
+        this_thread::sleep_for(chrono::milliseconds(static_cast<int>(1000 / rateOfMessage)));
+    }
+    cout << endl;
+}
+
 int getUserInput(int lowerBound, int upperBound, const string& promptMessage) {
     int userInput;
     do {
@@ -64,6 +72,7 @@ void Adventurer::defend(){
 Knight Class (Child)
 *******************************************************************************/
 void Knight::displayActions() {
+    printf("\e[0m \n");
     cout << name << " the Knight Actions: "<< endl;
     cout << "1. Attack" << endl;
     cout << "2. Defend" << endl;
@@ -75,7 +84,7 @@ Knight::Knight(){
     cout << "Enter the name of your Knight: ";
     
     string newName;
-    getline(cin >> ws, newName);
+    getline(cin, newName);
     try {
         name = testName(newName);
     }
@@ -125,6 +134,7 @@ void Knight::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 Rogue Class (Class)
 *******************************************************************************/
 void Rogue::displayActions() {
+    printf("\e[0m \n");
 	cout << name << " the Rogue Actions: "<< endl;
 	cout << "1. Attack" << endl;
 	cout << "2. Defend" << endl;
@@ -135,7 +145,7 @@ Rogue::Rogue() {
     cout << "Enter the name of your Rogue: ";
 	
     string newName;
-    getline(cin >> ws, newName);
+    getline(cin, newName);
     try {
         name = testName(newName);
     }
@@ -188,6 +198,7 @@ void Rogue::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& en
 Wizard Class (Class)
 *******************************************************************************/
 void Wizard::displayActions() {
+    printf("\e[0m \n");
 	cout << name << " the Wizard Actions: "<< endl;
 	cout << "1. Attack" << endl;
 	cout << "2. Defend" << endl;
@@ -199,7 +210,7 @@ Wizard::Wizard() {
 	cout << "Enter the name of your Wizard: ";
 
     string newName;
-    getline(cin >> ws, newName);
+    getline(cin, newName);
     try {
         name = testName(newName);
     }
@@ -262,6 +273,7 @@ Priest Class (Class)
 
 *******************************************************************************/
 void Priest::displayActions() {
+    printf("\e[0m \n");
 	cout << name << " the Priest Actions: "<< endl;
 	cout << "1. Attack" << endl;
 	cout << "2. Defend" << endl;
@@ -273,7 +285,7 @@ Priest::Priest() {
 	cout << "Enter the name of your Priest: ";
 	
 	string newName;
-    getline(cin >> ws, newName);
+    getline(cin, newName);
     try {
         name = testName(newName);
     }
@@ -352,19 +364,32 @@ int randomNumber(int lowerBound, int upperBound) {
 void promptUserUntilReceiveJoke1(){
     string prompt = "Knock Knock.";
     string response;
-
-    cout << prompt << endl;
-    getline(cin, response);
+    printf("\e[1;31m"); // Red font
+    displayStringLikeText(prompt, 15);
+    printf("\e[0m");
+    printf("\e[0;36m");
+    
+    cin.ignore();
+	getline(cin, response);
 	
-    while (!cin || 
-        !(response == "whos there" || response == "whos there." || 
-        response == "whos there?" || response == "Who's There." || 
-        response == "who's there" || response == "Who's There?")) {
+    while ((!cin) || 
+            (response != "whos there" && response != "Whos there" && 
+            response != "whos there?" && response != "Whos There?" &&
+            response != "who is there" && response != "Who is there" &&
+            response != "who is there?" && response != "Who is there?" &&
+            response != "who's there?" && response != "Who's there?" &&
+            response != "who's there." && response != "Who's there." &&
+            response != "whos there." && response != "Whos there." &&
+            response != "whos there?" && response != "Whos there?" &&
+            response != "who's there" && response != "Who's there")) {
+            
         cin.clear();
-        cin.ignore(INT_MAX, '\n');
-        cout << "No. Incorrect!" << endl;
-        cout << prompt << endl;
-        getline(cin, response);
+        //cin.ignore(INT_MAX); // the code keeps getting stuck here.
+        printf("\e[1;31m"); // Red font
+        displayStringLikeText("No. Incorrect!", 15);
+        displayStringLikeText(prompt, 15);
+        printf("\e[0;36m");
+        getline(cin >> ws, response);
     }
 }
 
@@ -374,7 +399,9 @@ void promptUserUntilReceiveJoke2(){
     string prompt = "GNOME";
     string response;
     
-    cout << prompt << endl;
+    printf("\e[1;31m"); // Red font
+    displayStringLikeText(prompt, 15);
+    printf("\e[0;36m");
     getline(cin, response);
     
     while ((!cin) || 
@@ -388,9 +415,11 @@ void promptUserUntilReceiveJoke2(){
             response != "GNOME who"
         )) { 
         cin.clear();
-        cin.ignore(INT_MAX, '\n');
-        cout << "No. Incorrect!" << endl;
-        cout << prompt << endl;
+        //cin.ignore(INT_MAX, '\n');
+        printf("\e[1;31m"); // Red font
+        displayStringLikeText("No. Incorrect!", 15);
+        displayStringLikeText(prompt, 15);
+        printf("\e[0;36m");
         getline(cin, response);
     }
 }
@@ -430,7 +459,10 @@ Gnomeageddon::Gnomeageddon(){
 }
 
 Gnomeageddon::~Gnomeageddon(){
-    cout<< "I'm all on my GNOME! *runs away*" << endl;
+    printf("\e[1;31m"); // Red font
+        displayStringLikeText("I'm all on my GNOME!", 15);
+    printf("\e[0m");
+    cout<< "*runs away*" << endl;
 }
 
 void Gnomeageddon::attack(vector<Adventurer*>& A){
@@ -449,16 +481,21 @@ void Gnomeageddon::speakGnome(bool firstEncounter = false){
     };
             
     if (firstEncounter){
-        cout << "This is our forest I don't GNOME you!" << endl;
+        printf("\e[1;31m"); // Red font
+        displayStringLikeText("This is our forest I don't GNOME you!", 15);
+        printf("\e[0m");
     } else if (firstUnderHalf && currentHealth < int(.5 * maxHealth)){
         promptUserUntilReceiveJoke1();
         promptUserUntilReceiveJoke2();
-        cout << "GNOME more arguing!! Die!!!" << endl;
-                
+        printf("\e[1;31m"); // Red font
+        displayStringLikeText("GNOME more arguing!! Die!!!", 15);
+        printf("\e[0m");
         firstUnderHalf = false;
     } else {
         int randomValue = randomNumber(0, 3);
-        cout << listOfPuns[randomValue] << endl;
+        printf("\e[1;31m"); // Red font
+        displayStringLikeText(listOfPuns[randomValue], 15);
+        printf("\e[0m");
     }
 }
 
