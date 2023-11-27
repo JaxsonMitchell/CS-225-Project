@@ -13,12 +13,11 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     // Initialization and seeding a random number generator.
     srand(time(NULL));
     int i;
-    
+
     cout<<"Once upon a time..."<<endl;
     sleep(2);
     cout<<"Four Adventures walk into the bar and the bartender says:"<<endl;
@@ -26,7 +25,7 @@ int main()
     printf("\e[0;33m"); //yellow font
     displayStringLikeText("Ay-yO WhAT are YE NAMEs?", 30);
     printf("\e[0m");
-    
+ 
     Wizard* wizard = new Wizard;
     Knight* knight = new Knight;
     Rogue* rogue = new Rogue;
@@ -80,40 +79,45 @@ int main()
     printf("\e[0m"); // Resets
     cout << "The gnomes coalesce into a monstrosity never gazed upon by mankind." << endl;
     
+/*******************************************************************************
+ * Start of battle 1
+*******************************************************************************/
     Gnomeageddon* gnomes = new Gnomeageddon;
     
     vector<Monster*> gnome;
     gnome.push_back(gnomes);
-/*******************************************************************************
- * Start of battle 1
-*******************************************************************************/
+
+
     Battle battle1(adventurers, gnome);
     battle1.fight();
     cout << endl << endl;
-    cout << rogue->getName() << ":";
-    printf("\e[0;36m"); //blue font
+
+    cout << rogue->getName() << ": ";
+    
+    printf("\e[1;34m"); //blue font
     displayStringLikeText("Wow, let's hope nothing else bad happens! ", 15);
     printf("\e[0m \n");
 
-    cout << priest->getName() << ":";
+    cout << priest->getName() << ": ";
     
-    printf("\e[0;36m"); //blue font
+    printf("\e[1;35m"); //purple font
     displayStringLikeText("DON'T SAY THAT!", 15);
     printf("\e[0m \n");
+    sleep(2);
 /*******************************************************************************
  * End of battle 1
 *******************************************************************************/
 
-    sleep(1);
-    cout << "The adventurers trip on 32 geese and stumble into the circus..?" << endl;
-    cout << "Ringleader:";
     
-    printf("\e[2;31m"); // Red font
+    cout << "The adventurers trip on 32 geese and stumble into the circus..?" << endl;
+    cout << "Ringleader: ";
+    
+    printf("\e[1;33m"); // Yellow
     displayStringLikeText("Well well well... what do we have here?", 10);
     printf("\e[0m \n");
-
-    cout << "Not The Joker:";
+    sleep(1);
     
+    cout << "Not The Joker: ";
     printf("\e[1;31m"); // Red font
     displayStringLikeText("Why HELLO! Why... So... SERIOUS!", 10);
     printf("\e[0m \n");
@@ -131,6 +135,7 @@ int main()
 /*******************************************************************************
  * Start of battle 2
 *******************************************************************************/
+
     Battle battle2(adventurers, circus);
     battle2.fight();
     sleep(2);
@@ -143,15 +148,20 @@ int main()
     sleep(1);
     cout << "After wandering the swamp for a while the party is approached by the figures." << endl;
 
-    cout << "Non-Descript Ogre:";
-    printf("\e[0;31m"); // Red font
-    displayStringLikeText("Look at what we have here, a group of Adventurers in MY SWAMP, you must be looking for that barkeeps Salt Shaker.", 10);
+    cout <<endl<< "Non-Descript Ogre: ";
+    printf("\e[1;32m"); // Green
+    displayStringLikeText("Look at what we have here, a group of Adventurers in MY SWAMP?",10);
+    displayStringLikeText("You must be looking for that barkeeps Salt Shaker.", 10);
     printf("\e[0m \n");
-
-    cout << "Non-Descript Ogre:";
-    printf("\e[0;31m"); // Red font
-    displayStringLikeText("Well you can't have it, this is MY SWAMP and you are tresspassing, and tresspassers make a great stew.", 10);
+    sleep(1);
+    cout << "Non-Descript Ogre: ";
+    printf("\e[1;32m"); // Green
+    displayStringLikeText("Well you can't have it!!", 10);
+    displayStringLikeText("This is MY SWAMP and you are tresspassing.", 10);
+    sleep(1);
+    displayStringLikeText("And tresspassers make a great stew.", 10);
     printf("\e[0m \n");
+    
     
     vector<Monster*> swamp;
     
@@ -178,7 +188,7 @@ int main()
 
     
     cout << wizard->getName() << ":";
-    printf("\e[0;36m"); //blue font
+    printf("\e[1;33m"); //yellow font
     displayStringLikeText("Is that a salt shaker??!", 15);
     printf("\e[0m \n");
     
@@ -186,22 +196,22 @@ int main()
     cout << "The adventurers all went to grab the salt shaker in the Dragons Horde!" << endl;
     sleep(1);
     cout << knight->getName() << " grabs the salt shaker, but trips on a goose!" << endl;
-    cout << knight->getName() << ":";
-    printf("\e[0;36m"); //blue font
+    cout << knight->getName() << ": ";
+    printf("\e[1;36m"); //teal font
     displayStringLikeText("OOOOOOOOOPS", 60);
     printf("\e[0m \n");
     cout << "The salt shaker shatters into millions of pieces on the floor..." << endl;
-    cout << knight->getName() << ":";
+    cout << knight->getName() << ": ";
     
     sleep(3);
-    printf("\e[0;36m"); //blue font
+    printf("\e[1;36m"); //teal font
     displayStringLikeText("F@CK", 2);
     printf("\e[0m \n");
     
     cout << "The adventurers all stare in awe at the broken salt shaker." << endl;
     sleep(3);
 
-    cout << knight->getName() << ":";
+    cout << knight->getName() << ": ";
     printf("\e[1;36m"); //blue font
     displayStringLikeText("I'm going home y'all", 20);
     printf("\e[0m \n");
