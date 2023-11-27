@@ -1,10 +1,5 @@
 #include "battlers.h"
-//#include <iostream>
-//#include <vector>
-//#include <chrono>
-//#include <thread>
-//#include <algorithm>
-//#include <unistd.h>
+
 
 void resetDefenseMultipliers(vector<Adventurer*>& vec);
 
@@ -16,6 +11,9 @@ void printOutAllMembers(vector<T*>& vec);
 
 bool neitherVectorsEmpty(vector<Adventurer*>& party, vector<Monster*>& enemies);
 
+/*******************************************************************************
+ * Battle classs
+*******************************************************************************/
 class Battle {
 private:
     vector<Adventurer*>& party;
@@ -24,5 +22,3 @@ public:
     Battle(vector<Adventurer*>& party, vector<Monster*>& enemies);
     void fight();
 };
-
-//void displayStringLikeText(string text, float rateOfMessage);
