@@ -1,10 +1,10 @@
 #include "battlers.h"
-#include <iostream>
-#include <vector>
-#include <chrono>
-#include <thread>
-#include <algorithm>
-#include <unistd.h>
+//#include <iostream>
+//#include <vector>
+//#include <chrono>
+//#include <thread>
+//#include <algorithm>
+//#include <unistd.h>
 
 void resetDefenseMultipliers(vector<Adventurer*>& vec);
 
@@ -25,4 +25,4 @@ public:
     void fight();
 };
 
-void displayStringLikeText(string text, float rateOfMessage);
+//void displayStringLikeText(string text, float rateOfMessage);
