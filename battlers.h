@@ -3,9 +3,13 @@
 #include <iostream>
 #include <vector>
 #include <climits>
+#include <chrono>
+#include <thread>
+#include <algorithm>
+#include <unistd.h>
 
 using namespace std;
-
+void displayStringLikeText(string text, float rateOfMessage);
 class Monster;
 class Adventurer;
 
