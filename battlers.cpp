@@ -574,9 +574,9 @@ Lion::Lion(){
 Lion::~Lion(){
     printf("\e[0;36m");
     cout << "The Lion runs away!" << endl;
-     printf("\e[0m");
-    cout << "Ringleader: ";
+    printf("\e[0m");
     sleep(1);
+    cout << "Ringleader: ";
     printf("\e[1;33m"); // Yellow
     displayStringLikeText("No Henry!", 10);
     printf("\e[0m \n");
@@ -615,8 +615,8 @@ Ringleader::Ringleader(){
 
 
 Ringleader::~Ringleader(){
-    cout << "Ringleader: ";
     sleep(1);
+    cout << "Ringleader: ";
     printf("\e[1;33m"); // Yellow
     displayStringLikeText("NO! MY CIRCUS!!", 10);
     printf("\e[0m \n");
@@ -723,7 +723,11 @@ CatInBoots::CatInBoots(){
 }
 
 CatInBoots::~CatInBoots(){
-    cout << "Oof." << endl;
+    cout << "Cat in Boots: ";
+    printf("\e[0;33m"); //yellow font
+    displayStringLikeText("Oof", 15);
+    printf("\e[0m\n"); //yellow font
+    sleep(2);
 }
 
 void CatInBoots::demoralize(vector<Adventurer*>& A){
@@ -734,8 +738,12 @@ void CatInBoots::demoralize(vector<Adventurer*>& A){
 void CatInBoots::stab(vector<Adventurer*>& A){
     int x = rand() % A.size();
     A[x]->lowerHealth(20);
+    printf("\e[0;36m\n"); // not Red font
     cout<<"Cat in Boots stabs "<< A[x]->getName()<<" for 20 Damage!!"<<endl;
-    cout<< *A[x] <<endl;
+    printf("\e[0;32m");
+    cout<<*A[x]<<endl;
+    printf("\e[0m");
+    
 }
 
 
@@ -759,8 +767,12 @@ NondescriptOgre::NondescriptOgre(){
 }
 
 NondescriptOgre::~NondescriptOgre(){
+    printf("\e[0;36m"); // not Red font
     cout << "The nondescript ogre looks bored..." << endl;
-    cout << "Nondescript Ogre: *uhhh idk*";
+    sleep(2);
+    cout << "Nondescript Ogre walks away.";
+    printf("\e[0m\n");
+    sleep(2);
 }
 
 void NondescriptOgre::throwALog(vector<Adventurer*>& A){
@@ -768,7 +780,9 @@ void NondescriptOgre::throwALog(vector<Adventurer*>& A){
     for (int i = 0; i<A.size(); i++){
         A[i]->lowerHealth(10);
     }
-    cout<<" The Non-Descript Ogre throws a log hitting the whole party!!!"<<endl;
+    printf("\e[0;36m"); // not Red font
+    cout<<"The Non-Descript Ogre throws a log hitting the whole party!!!"<<endl;
+    printf("\e[0m");
     
 }
 
@@ -777,7 +791,9 @@ void NondescriptOgre::roar(vector<Adventurer*>& A){
     for (int i = 0; i < A.size(); i++){
         A[i]->def *= 1.25;
     }
-    cout<<" The Non-Descript Ogre Roars lowering the defense of the Adventurers!!"<<endl;
+    printf("\e[0;36m"); // not Red font
+    cout<<"The Non-Descript Ogre Roars lowering the defense of the Adventurers!!"<<endl;
+    printf("\e[0m");
 }
 
 
@@ -801,7 +817,11 @@ Jackass::Jackass(){
 }
 
 Jackass::~Jackass(){
-    cout << "INSERT DONKEY QUOTE" << endl;
+    cout << "Jackass: ";
+    printf("\e[0;33m"); //yellow font
+    displayStringLikeText("INSERT DONKEY QUOTE", 10);
+    printf("\e[0m\n"); //yellow font
+    
 }
 
 void Jackass::annoy(vector<Adventurer*>& A, vector<Monster*>& M){
@@ -813,7 +833,10 @@ void Jackass::annoy(vector<Adventurer*>& A, vector<Monster*>& M){
     for(int i = 0; i<M.size(); i++){
         M[i]->lowerHealth(5);
     }
+    printf("\e[0;36m"); // not Red font
     cout<<"Jackass annoys everyone giving them a headache, everyone takes 5 damage...."<<endl;
+    printf("\e[0m");
+    sleep(2);
 }
 
 
@@ -836,9 +859,11 @@ void Dragon::rend(vector<Adventurer*>& A){
     // Implement basic dragon attack.
     int x = rand() % A.size();
     A[x]->lowerHealth(30);
+    printf("\e[0;36m\n");
     cout<<"The Dragon rends "<<A[x]->getName()<<" for 30 Damage!!!"<<endl;
     cout<<*A[x]<<endl;
     this->fireBreathCoolDown--;
+    sleep(3);
 }
 
 void Dragon::fireBreath(vector<Adventurer*>& A){
@@ -846,8 +871,10 @@ void Dragon::fireBreath(vector<Adventurer*>& A){
     for (int i = 0; i < A.size(); i++){
         A[i]->lowerHealth(40);
     }
+    printf("\e[0;36m\n");
     cout<<"The Dragon Breaths Fire on all the Adventurers dealing 40 Damage!!!"<<endl;
     this->fireBreathCoolDown = 3;
+    sleep(3);
 }
 
 void Dragon::doAction(vector<Adventurer*>& party, vector<Monster*>& monsters){
