@@ -17,7 +17,7 @@ int main() {
     // Initialization and seeding a random number generator.
     srand(time(NULL));
     int i;
-
+/**
     cout<<"Once upon a time..."<<endl;
     sleep(2);
     cout<<"Four Adventures walk into the bar and the bartender says:"<<endl;
@@ -26,6 +26,9 @@ int main() {
     displayStringLikeText("Ay-yO WhAT are YE NAMEs?", 30);
     printf("\e[0m");
  
+/*******************************************************************************
+ * New adventurers
+*******************************************************************************/
     Wizard* wizard = new Wizard;
     Knight* knight = new Knight;
     Rogue* rogue = new Rogue;
@@ -37,7 +40,7 @@ int main() {
     adventurers.push_back(knight);
     adventurers.push_back(rogue);
     adventurers.push_back(priest);
-
+/**
     printf("\e[0;33m \n"); //yellow font
     displayStringLikeText("ThAts...", 30);
     sleep(1);
@@ -82,6 +85,7 @@ int main() {
 /*******************************************************************************
  * Start of battle 1
 *******************************************************************************/
+/***
     Gnomeageddon* gnomes = new Gnomeageddon;
     
     vector<Monster*> gnome;
@@ -93,7 +97,6 @@ int main() {
     cout << endl << endl;
 
     cout << rogue->getName() << ": ";
-    
     printf("\e[1;34m"); //blue font
     displayStringLikeText("Wow, let's hope nothing else bad happens! ", 15);
     printf("\e[0m \n");
@@ -103,15 +106,13 @@ int main() {
     printf("\e[1;35m"); //purple font
     displayStringLikeText("DON'T SAY THAT!", 15);
     printf("\e[0m \n");
-    sleep(2);
 /*******************************************************************************
  * End of battle 1
 *******************************************************************************/
-
-    
     cout << "The adventurers trip on 32 geese and stumble into the circus..?" << endl;
-    cout << "Ringleader: ";
+    sleep(2);
     
+    cout <<endl<< "Ringleader: ";
     printf("\e[1;33m"); // Yellow
     displayStringLikeText("Well well well... what do we have here?", 10);
     printf("\e[0m \n");
@@ -120,7 +121,7 @@ int main() {
     cout << "Not The Joker: ";
     printf("\e[1;31m"); // Red font
     displayStringLikeText("Why HELLO! Why... So... SERIOUS!", 10);
-    printf("\e[0m \n");
+    printf("\e[0m");
 
     vector<Monster*> circus;
 
@@ -145,9 +146,9 @@ int main() {
 *******************************************************************************/
     sleep(2);
     cout << "A Swamp?" << endl;
-    sleep(1);
-    cout << "After wandering the swamp for a while the party is approached by the figures." << endl;
-
+    sleep(3);
+    cout << "\nAfter wandering the swamp for a while the party is approached by the figures." << endl;
+    sleep(2);
     cout <<endl<< "Non-Descript Ogre: ";
     printf("\e[1;32m"); // Green
     displayStringLikeText("Look at what we have here, a group of Adventurers in MY SWAMP?",10);
