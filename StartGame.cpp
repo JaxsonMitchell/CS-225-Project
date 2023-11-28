@@ -17,7 +17,7 @@ int main() {
     // Initialization and seeding a random number generator.
     srand(time(NULL));
     int i;
-/**
+
     cout<<"Once upon a time..."<<endl;
     sleep(2);
     cout<<"Four Adventures walk into the bar and the bartender says:"<<endl;
@@ -40,7 +40,11 @@ int main() {
     adventurers.push_back(knight);
     adventurers.push_back(rogue);
     adventurers.push_back(priest);
-/**
+    
+/*******************************************************************************
+ * Text
+*******************************************************************************/
+
     printf("\e[0;33m \n"); //yellow font
     displayStringLikeText("ThAts...", 30);
     sleep(1);
@@ -85,7 +89,7 @@ int main() {
 /*******************************************************************************
  * Start of battle 1
 *******************************************************************************/
-/***
+
     Gnomeageddon* gnomes = new Gnomeageddon;
     
     vector<Monster*> gnome;
@@ -109,6 +113,7 @@ int main() {
 /*******************************************************************************
  * End of battle 1
 *******************************************************************************/
+
     cout << "The adventurers trip on 32 geese and stumble into the circus..?" << endl;
     sleep(2);
     
@@ -136,7 +141,6 @@ int main() {
 /*******************************************************************************
  * Start of battle 2
 *******************************************************************************/
-
     Battle battle2(adventurers, circus);
     battle2.fight();
     sleep(2);
@@ -162,8 +166,10 @@ int main() {
     sleep(1);
     displayStringLikeText("And tresspassers make a great stew.", 10);
     printf("\e[0m \n");
-    
-    
+/*******************************************************************************
+ * Start of battle 3
+*******************************************************************************/  
+
     vector<Monster*> swamp;
     
     CatInBoots* cat = new CatInBoots;
@@ -174,11 +180,28 @@ int main() {
     swamp.push_back(ogre);
     swamp.push_back(jackass);
     Battle battle3(adventurers, swamp);
+    
+
     battle3.fight();
 
-
-
-
+/*******************************************************************************
+ * End of battle 3
+*******************************************************************************/    
+    cout<<"The adventurers finally make it out of the swamp alive and arrive at..."<<endl;
+    sleep(3);
+    printf("\e[1;35m");
+    displayStringLikeText("THE DRAGON'S LAIR!!!", 5);
+    printf("\e[0m\n");
+    sleep(3);
+    cout<<"They end up face to face with a firocious beast..."<<endl;
+    sleep(3);
+    cout<<"A DRAGON!!!"<<endl;
+    sleep(3);
+    cout << knight->getName() << ": ";
+    printf("\e[0;36m");
+    displayStringLikeText("AAAAAAAAAAAAAAAAA!!", 8);
+    printf("\e[0m");
+    
     
     vector<Monster*> dragonDen;
 
