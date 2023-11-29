@@ -1,3 +1,11 @@
+/*******************************************************************************
+* filename: battlers.cpp
+* This file is the function and class implementations of both adventurers and monsters.
+* It also includes the displayStringLikeText function which is used throughout the
+* program to emulate speech. It contains other functions like gameOver used within
+* battle.cpp as well.
+*******************************************************************************/
+
 #include "battlers.h"
 
 /*******************************************************************************
@@ -27,6 +35,7 @@ void printOutAllMembers(vector<T*>& vec) {
 }
 
 int getUserInput(int lowerBound, int upperBound, const string& promptMessage) {
+    
     int userInput;
     do {
         cout << promptMessage;
@@ -35,9 +44,14 @@ int getUserInput(int lowerBound, int upperBound, const string& promptMessage) {
             cin.ignore(INT_MAX, '\n');
             cout << "Invalid input. Please enter an integer." << endl;
             cout << promptMessage;
-            cin >> userInput;
+        }
+    
+        if (userInput < lowerBound || userInput > upperBound) {
+            cout << "Out of bounds. Please enter a value between "
+                 << lowerBound << " and " << upperBound << "." << endl;
         }
     } while (userInput < lowerBound || userInput > upperBound);
+
     return userInput;
 }
 
@@ -96,7 +110,17 @@ void Knight::displayActions() {
 }
 
 Knight::Knight(){
+    this->maxHealth = 130;
+    this->attackValue = 20;
+    this->currentHealth = this->maxHealth;
     
+    ifstream myfile ("Knight_Art.txt");
+    char art;
+    while (myfile) {
+        art = myfile.get();
+        cout << art;
+    }
+    cout << endl;
     cout << "Enter the name of your Knight: ";
     
     string newName;
@@ -105,23 +129,13 @@ Knight::Knight(){
         name = testName(newName);
     }
     catch (int i) {
-        cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
+        displayStringLikeText("OK ELon MUSK! this is a person not a Tezzzla!", 10);
         gameOver();
     }
-    
-    this->maxHealth = 130;
-    this->attackValue = 20;
-    this->currentHealth = this->maxHealth;
-    /*ifstream myfile ("Knight_Art.txt");
-    char art;
-    while (myfile) {
-        art = myfile.get();
-        cout << art;
-    }*/
 }
 
 void Knight::bigSlash(Monster& M){
-    M.lowerHealth(attackValue * 1.5);
+    M.lowerHealth(attackValue * 2);
     printf("\e[0;31m");
     cout<<endl<<M<<endl;
     printf("\e[0m");
@@ -131,14 +145,14 @@ void Knight::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
     int actionNum = getUserInput(1, 3, "What action will the knight do? ");
     int len = enemies.size();
     int i;
-
+    int x = rand() % 3; // 0, 1, or 2.
     switch (actionNum) {
         case 1:
             cout<<endl;
             printf("\e[0;31m"); // Red font
             printOutAllMembers(enemies);
             printf("\e[0m");
-            i = getUserInput(1, len + 1, "Who will the knight attack? ");
+            i = getUserInput(1, len, "Who will the knight attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
         case 2:
@@ -149,8 +163,13 @@ void Knight::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
             printf("\e[0;31m"); // Red font
             printOutAllMembers(enemies);
             printf("\e[0m");
-            i = getUserInput(1, len + 1, "Who will the knight use Big Slash on? ");
-            bigSlash(*(enemies[i - 1]));
+            i = getUserInput(1, len, "Who will the knight use Big Slash on? ");
+            if (x != 2){
+                bigSlash(*(enemies[i - 1]));
+            } else {
+                cout << this->name << " swung too hard and hit the floor and took 5 recoil damage!" << endl;
+                this->lowerHealth(5);
+            }
             break;
     }
 }
@@ -167,6 +186,18 @@ void Rogue::displayActions() {
 
 
 Rogue::Rogue() {
+    this->maxHealth = 100;
+    this->attackValue = 30;
+    this->currentHealth = this->maxHealth;
+
+    ifstream myfile("Rogue_Art.txt");
+    char art;
+    while (myfile) {
+        art = myfile.get();
+        cout << art;
+    }
+    cout << endl;
+    
     cout << "Enter the name of your Rogue: ";
 	
     string newName;
@@ -178,17 +209,6 @@ Rogue::Rogue() {
         cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
         gameOver();
     }
-    this->maxHealth = 100;
-    this->attackValue = 20;
-    this->currentHealth = this->maxHealth;
-
-    /*ifstream myfile("Rogue_Art.txt");
-    char art;
-    while (myfile) {
-    art = myfile.get();
-    cout << art;
-    }*/
-    critChance = 1;
 }
 
 void Rogue::rogueAttack(Monster& M){
@@ -218,7 +238,7 @@ void Rogue::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& en
             printf("\e[0;31m"); // Red font
             printOutAllMembers(enemies);
             printf("\e[0m");
-            i = getUserInput(1, len + 1, "Who will the rogue attack? ");
+            i = getUserInput(1, len, "Who will the rogue attack? ");
             rogueAttack(*(enemies[i - 1]));
             break;
         case 2:
@@ -239,6 +259,19 @@ void Wizard::displayActions() {
 }
 
 Wizard::Wizard() {
+	this->maxHealth = 60;
+    this->attackValue = 10;
+	this->currentHealth = this->maxHealth;
+	ifstream myfile("Wizard_Art.txt");
+	char art;
+	while (myfile) {
+		art = myfile.get();
+		cout << art;
+	}
+	cout << endl;
+	this->currentHealth = this->maxHealth;
+	numFireballs = 2;
+	
 	cout << "Enter the name of your Wizard: ";
 
     string newName;
@@ -250,18 +283,6 @@ Wizard::Wizard() {
         cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
         gameOver();
     }
-    
-	this->maxHealth = 60;
-    this->attackValue = 50;
-	this->currentHealth = this->maxHealth;
-	/*ifstream myfile("Wizard_Art.txt");
-	char art;
-	while (myfile) {
-		art = myfile.get();
-		cout << art;
-	}*/
-	this->currentHealth = this->maxHealth;
-	numFireballs = 2;
 }
 
 void Wizard::fireball(vector<Monster*>& M){
@@ -270,6 +291,7 @@ void Wizard::fireball(vector<Monster*>& M){
     for(int i = 0; i < M.size(); i++){
         M[i]->lowerHealth(50);
     }
+    this->numFireballs--;
     printf("\e[0;36m\n");
     cout<<"All the Monsters took 50 damage!!"<<endl;
     printf("\e[0m\n");
@@ -282,6 +304,7 @@ void Wizard::refocus(){
 }
 
 void Wizard::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& enemies) {
+    cout << "Number of Fireballs: " << this->numFireballs << endl;
     int actionNum = getUserInput(1, 4, "What action will the wizard do? ");
     int len = enemies.size();
     int i;
@@ -292,14 +315,21 @@ void Wizard::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
             printf("\e[0;31m"); // Red font
             printOutAllMembers(enemies);
             printf("\e[0m");
-            i = getUserInput(1, len + 1, "Who will the wizard attack? ");
+            i = getUserInput(1, len, "Who will the wizard attack? ");
             basicAttack(*(enemies[i - 1]));
             break;
         case 2:
             defend();
             break;
         case 3:
-            fireball(enemies);
+            if (this->numFireballs){
+                fireball(enemies);
+            } else {
+                cout << this->name << " looks exhausted..." << endl;
+                sleep(1);
+                cout << "They collapse on the floor because they have no more fireballs left." << endl;
+                cout << "Refocus to get more!" << endl;
+            }
             break;
         case 4:
             refocus();
@@ -309,7 +339,6 @@ void Wizard::promptUserForAction(vector<Adventurer*>& party, vector<Monster*>& e
 
 /*******************************************************************************
 Priest Class (Class)
-
 *******************************************************************************/
 void Priest::displayActions() {
     printf("\e[0m \n");
@@ -321,6 +350,18 @@ void Priest::displayActions() {
 }
 
 Priest::Priest() {
+	this->maxHealth = 60;
+    this->attackValue = 50;
+	this->currentHealth = this->maxHealth;
+	
+	ifstream myfile("Priest_Art.txt");
+	char art;
+	while (myfile) {
+		art = myfile.get();
+		cout << art;
+	}
+	cout << endl;
+	
 	cout << "Enter the name of your Priest: ";
 	
 	string newName;
@@ -329,20 +370,9 @@ Priest::Priest() {
         name = testName(newName);
     }
     catch (int i) {
-        cout<<"OK ELon MUSK! this is a person not a Tezzzla!"<<endl;
+        displayStringLikeText("OK ELon MUSK! this is a person not a Tezzzla!", 10);
         gameOver();
     }
-	
-	this->maxHealth = 60;
-        this->attackValue = 50;
-	this->currentHealth = this->maxHealth;
-	
-	/*ifstream myfile("Priest_Art.txt");
-	char art;
-	while (myfile) {
-		art = myfile.get();
-		cout << art;
-	}*/
 }
 
 void Priest::heal(vector<Adventurer*>& A){
@@ -476,7 +506,6 @@ void promptUserUntilReceiveJoke2(){
 
 /*******************************************************************************
 Monster Class (Parent)
-
 *******************************************************************************/
 void Monster::lowerHealth(int healthDropped){
     // Lowers the monster's health.
@@ -498,11 +527,10 @@ ostream& operator<<(ostream& os, const Monster& monster) {
 
 /*******************************************************************************
 Gnome Class (Child)
-
 *******************************************************************************/
 
 Gnomeageddon::Gnomeageddon(){
-    this->maxHealth = 100;
+    this->maxHealth = 350;
     this->currentHealth = maxHealth;
     this->monsterName = "Gnomeageddon";
 }
@@ -518,7 +546,7 @@ Gnomeageddon::~Gnomeageddon(){
 
 void Gnomeageddon::attack(vector<Adventurer*>& A){
     int x = rand() % A.size();
-    A[x]->lowerHealth(currentHealth / 2);
+    A[x]->lowerHealth(currentHealth / 4);
     sleep(2);
     printf("\e[0;36m\n");
     cout<<"Gnomeaggeddon strikes " << A[x]->getName() << endl;
@@ -566,7 +594,7 @@ Lion Class (Child)
 
 *******************************************************************************/
 Lion::Lion(){
-    this->maxHealth = 20;
+    this->maxHealth = 95;
     this->currentHealth = maxHealth;
     this->monsterName = "Lion";
 }
@@ -608,7 +636,7 @@ Ringleader Class (Child)
 
 *******************************************************************************/
 Ringleader::Ringleader(){
-    this->maxHealth = 50;
+    this->maxHealth = 120;
     this->currentHealth = maxHealth;
     this->monsterName = "Ringleader";
 }
@@ -659,7 +687,7 @@ Clown Class (Child)
 
 *******************************************************************************/
 Clown::Clown(){
-    this->maxHealth = 30;
+    this->maxHealth = 250;
     this->currentHealth = maxHealth;
     this->monsterName = "Clown (not the Joker)";
 }
@@ -717,7 +745,7 @@ void Clown::doAction(vector<Adventurer*>& party, vector<Monster*>& monsters) {
 Cat in Boots Class (Child)
 *******************************************************************************/
 CatInBoots::CatInBoots(){
-    this->maxHealth = 20;
+    this->maxHealth = 95;
     this->currentHealth = maxHealth;
     this->monsterName = "Cat in Boots";
 }
@@ -761,7 +789,7 @@ Nondescript Ogre Class (Child)
 
 *******************************************************************************/
 NondescriptOgre::NondescriptOgre(){
-    this->maxHealth = 70;
+    this->maxHealth = 160;
     this->currentHealth = maxHealth;
     this->monsterName = "Nondescript Ogre";
 }
@@ -791,7 +819,7 @@ void NondescriptOgre::roar(vector<Adventurer*>& A){
     for (int i = 0; i < A.size(); i++){
         A[i]->def *= 1.25;
     }
-    printf("\e[0;36m"); // not Red font
+    printf("\e[0;36m"); 
     cout<<"The Non-Descript Ogre Roars lowering the defense of the Adventurers!!"<<endl;
     printf("\e[0m");
 }
@@ -811,17 +839,25 @@ Jackass Class (Child)
 
 *******************************************************************************/
 Jackass::Jackass(){
-    this->maxHealth = 60;
+    this->maxHealth = 100;
     this->currentHealth = maxHealth;
     this->monsterName = "Jackass";
 }
 
 Jackass::~Jackass(){
-    cout << "Jackass: ";
+    cout << "Jackass *sings dramatically*: ";
     printf("\e[0;33m"); //yellow font
-    displayStringLikeText("INSERT DONKEY QUOTE", 10);
-    printf("\e[0m\n"); //yellow font
-    
+    displayStringLikeText("Cause I'm all alone...", 10);
+    displayStringLikeText("There's no one here beside meeeee", 10);
+    displayStringLikeText("My problems have all gone", 10);
+    displayStringLikeText("There's no one to deride me!", 10); 
+    displayStringLikeText("But ya gotta have friends..", 10);
+    printf("\e[0m\n"); //Resets
+    cout << endl << "Shrek: ";
+    printf("\e[1;32m"); // Green
+    displayStringLikeText("STOP...", 6);
+    displayStringLikeText("SINGING", 6);
+    printf("\e[0m \n");
 }
 
 void Jackass::annoy(vector<Adventurer*>& A, vector<Monster*>& M){
@@ -849,7 +885,7 @@ Dragon Class (Child)
 
 *******************************************************************************/
 Dragon::Dragon(){
-    this->currentHealth = 100;
+    this->currentHealth = 400;
     this->maxHealth = currentHealth;
     this->monsterName = "Dragon";
     this->fireBreathCoolDown = 0;
@@ -869,7 +905,7 @@ void Dragon::rend(vector<Adventurer*>& A){
 void Dragon::fireBreath(vector<Adventurer*>& A){
     // Shoots a blast of fire.
     for (int i = 0; i < A.size(); i++){
-        A[i]->lowerHealth(40);
+        A[i]->lowerHealth(50);
     }
     printf("\e[0;36m\n");
     cout<<"The Dragon Breaths Fire on all the Adventurers dealing 40 Damage!!!"<<endl;
