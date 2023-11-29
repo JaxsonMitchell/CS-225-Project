@@ -9,6 +9,6 @@ Here are a few necessary guides that are followed in the project.
 * There is a file header at the top of every file giving a basic description of the file as a whole as well as the name of the file.
 * Comments are used as breaks between implementations within code to compartmentalize the code better allowing for better organization of the code.
 * Comments may add extra clutter to code, so the code itself should explain what is happening through good naming style.
-** Keep comments sparse
-** Allow function names and variable names be clear enough to explain what is happening.
+* Keep comments sparse
+* Allow function names and variable names be clear enough to explain what is happening.
 * Header files (.h) don't contain function implementation and will be in a separate C++ (.cpp) source file. They only contain class and function headers.
