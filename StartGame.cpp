@@ -1,7 +1,6 @@
 /******************************************************************************
-
-* Name: StartGame.cpp
-
+* fileName: StartGame.cpp
+* The file is the main script for the game containing the dialogue and battles.
 *******************************************************************************/
 #include <iostream>
 #include <vector>
@@ -26,9 +25,9 @@ int main() {
     displayStringLikeText("Ay-yO WhAT are YE NAMEs?", 30);
     printf("\e[0m");
  
-/*******************************************************************************
- * New adventurers
-*******************************************************************************/
+    /*******************************************************************************
+     * New adventurers
+    *******************************************************************************/
     Wizard* wizard = new Wizard;
     Knight* knight = new Knight;
     Rogue* rogue = new Rogue;
@@ -41,10 +40,14 @@ int main() {
     adventurers.push_back(rogue);
     adventurers.push_back(priest);
     
-/*******************************************************************************
- * Text
-*******************************************************************************/
-
+    string wizardName = wizard->getName();
+    string knightName = knight->getName();
+    string rogueName = rogue->getName();
+    string priestName = priest->getName();
+    
+    /*******************************************************************************
+     * Beginning Text
+    *******************************************************************************/
     printf("\e[0;33m \n"); //yellow font
     displayStringLikeText("ThAts...", 30);
     sleep(1);
@@ -57,7 +60,7 @@ int main() {
     displayStringLikeText("Would you be kind enough to find it for me?", 30);
     printf("\e[0m \n");
    
-    cout<< knight->getName() << " the knight replies with ";
+    cout<< knightName << " the knight replies with ";
     printf("\e[0;36m"); //blue font
     displayStringLikeText("What..? Salt..? Of course not.", 10);
     
@@ -76,7 +79,7 @@ int main() {
         cout<<" "<<adventurers[i]->getName()<<",";
         
     }
-    cout<<" and "<<adventurers[i]->getName()
+    cout<<" and "<< adventurers[i]->getName()
         <<" all walk out of the bar and into..."<<endl;
     
     sleep(2);
@@ -86,9 +89,9 @@ int main() {
     printf("\e[0m"); // Resets
     cout << "The gnomes coalesce into a monstrosity never gazed upon by mankind." << endl;
     
-/*******************************************************************************
- * Start of battle 1
-*******************************************************************************/
+    /***************************************************************************
+     * Start of battle 1
+    ***************************************************************************/
 
     Gnomeageddon* gnomes = new Gnomeageddon;
     
@@ -100,24 +103,24 @@ int main() {
     battle1.fight();
     cout << endl << endl;
 
-    cout << rogue->getName() << ": ";
+    cout << rogueName << ": ";
     printf("\e[1;34m"); //blue font
     displayStringLikeText("Wow, let's hope nothing else bad happens! ", 15);
     printf("\e[0m \n");
 
-    cout << priest->getName() << ": ";
+    cout << priestName << ": ";
     
     printf("\e[1;35m"); //purple font
     displayStringLikeText("DON'T SAY THAT!", 15);
     printf("\e[0m \n");
-/*******************************************************************************
- * End of battle 1
-*******************************************************************************/
+    /***************************************************************************
+     * End of battle 1
+     **************************************************************************/
 
     cout << "The adventurers trip on 32 geese and stumble into the circus..?" << endl;
     sleep(2);
     
-    cout <<endl<< "Ringleader: ";
+    cout << endl << "Ringleader: ";
     printf("\e[1;33m"); // Yellow
     displayStringLikeText("Well well well... what do we have here?", 10);
     printf("\e[0m \n");
@@ -138,16 +141,16 @@ int main() {
     circus.push_back(ringleader);
     circus.push_back(clown);
     
-/*******************************************************************************
- * Start of battle 2
-*******************************************************************************/
+    /***************************************************************************
+     * Start of battle 2
+     **************************************************************************/
     Battle battle2(adventurers, circus);
     battle2.fight();
     sleep(2);
     cout << "The adventurers escape all the cringey jokes and stumble into..." << endl;
-/*******************************************************************************
- * End of battle 2
-*******************************************************************************/
+    /***************************************************************************
+     * End of battle 2
+     **************************************************************************/
     sleep(2);
     cout << "A Swamp?" << endl;
     sleep(3);
@@ -166,9 +169,9 @@ int main() {
     sleep(1);
     displayStringLikeText("And tresspassers make a great stew.", 10);
     printf("\e[0m \n");
-/*******************************************************************************
- * Start of battle 3
-*******************************************************************************/  
+    /***************************************************************************
+     * Start of battle 3
+     **************************************************************************/  
 
     vector<Monster*> swamp;
     
@@ -184,20 +187,20 @@ int main() {
 
     battle3.fight();
 
-/*******************************************************************************
- * End of battle 3
-*******************************************************************************/    
+    /***************************************************************************
+     * End of battle 3
+     **************************************************************************/    
     cout<<"The adventurers finally make it out of the swamp alive and arrive at..."<<endl;
     sleep(3);
     printf("\e[1;35m");
     displayStringLikeText("THE DRAGON'S LAIR!!!", 5);
     printf("\e[0m\n");
     sleep(3);
-    cout<<"They end up face to face with a firocious beast..."<<endl;
+    cout<<"They end up face to face with a ferocious beast..."<<endl;
     sleep(3);
     cout<<"A DRAGON!!!"<<endl;
     sleep(3);
-    cout << knight->getName() << ": ";
+    cout << knightName << ": ";
     printf("\e[0;36m");
     displayStringLikeText("AAAAAAAAAAAAAAAAA!!", 8);
     printf("\e[0m");
@@ -211,7 +214,7 @@ int main() {
     battle4.fight();
 
     
-    cout << wizard->getName() << ":";
+    cout << wizardName << ":";
     printf("\e[1;33m"); //yellow font
     displayStringLikeText("Is that a salt shaker??!", 15);
     printf("\e[0m \n");
@@ -219,13 +222,13 @@ int main() {
     sleep(1);
     cout << "The adventurers all went to grab the salt shaker in the Dragons Horde!" << endl;
     sleep(1);
-    cout << knight->getName() << " grabs the salt shaker, but trips on a goose!" << endl;
-    cout << knight->getName() << ": ";
+    cout << knightName << " grabs the salt shaker, but trips on a goose!" << endl;
+    cout << knightName << ": ";
     printf("\e[1;36m"); //teal font
     displayStringLikeText("OOOOOOOOOPS", 60);
     printf("\e[0m \n");
     cout << "The salt shaker shatters into millions of pieces on the floor..." << endl;
-    cout << knight->getName() << ": ";
+    cout << knightName << ": ";
     
     sleep(3);
     printf("\e[1;36m"); //teal font
@@ -235,7 +238,7 @@ int main() {
     cout << "The adventurers all stare in awe at the broken salt shaker." << endl;
     sleep(3);
 
-    cout << knight->getName() << ": ";
+    cout << knightName << ": ";
     printf("\e[1;36m"); //blue font
     displayStringLikeText("I'm going home y'all", 20);
     printf("\e[0m \n");
