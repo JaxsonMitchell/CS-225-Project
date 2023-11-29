@@ -1,3 +1,9 @@
+/*******************************************************************************
+* filename: battlers.h
+* This file is the function and class headers of both adventurers and monsters.
+* The includes are the imports necessary for the battler.cpp function and 
+* class implementations.
+*******************************************************************************/
 #pragma once
 #include <string>
 #include <iostream>
@@ -7,6 +13,7 @@
 #include <thread>
 #include <algorithm>
 #include <unistd.h>
+#include <fstream>
 
 using namespace std;
 void displayStringLikeText(string text, float rateOfMessage);
@@ -69,8 +76,6 @@ public:
 Rogue Class (Child)
 *******************************************************************************/
 class Rogue : public Adventurer {
-private:
-    double critChance;
 public:
     Rogue();
     void rogueAttack(Monster&);
