@@ -1,3 +1,10 @@
+/*******************************************************************************
+* filename: battle.cpp
+* This file is the function and class implemenations of Battle.
+* It also contains function implementations for template functions used 
+* within the implementation of fight (i'm so proud of those template functions)
+*******************************************************************************/
+
 #include "battle.h"
 
 using namespace std;
@@ -83,4 +90,9 @@ void Battle::fight() {
         }
         printf("\e[0m");
     } while (neitherVectorsEmpty(party, enemies));
+    
+    // If your party all get's knocked out.
+    if (party.size() == 0){
+        gameOver();
+    }
 }
